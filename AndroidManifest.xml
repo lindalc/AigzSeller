@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zykj.aiguanzhu"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.zykj.aiguanzhu.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.BaseActivity"
+            android:label="@string/title_activity_base" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.AttentionActivity"
+            android:label="@string/title_activity_concernuser" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.ConUserDetailActivity"
+            android:label="@string/title_activity_con_user_detail" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.ReserationDetailActivity"
+            android:label="@string/title_activity_reseration_detail" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.InviteActivity"
+            android:label="@string/title_activity_invite" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.ReserationActivity"
+            android:label="@string/title_activity_reseration" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.MyPsdActivity"
+            android:label="@string/title_activity_my_psd" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.ReserationCommitActivity"
+            android:label="@string/title_activity_reseration_commit" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.RechargeActivity"
+            android:label="@string/title_activity_recharge" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.CartDataActivity"
+            android:label="@string/title_activity_cart_data" >
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.CartCheckActivity"
+            android:label="@string/title_activity_cart_check" >
+        </activity>
+    </application>
+
+</manifest>

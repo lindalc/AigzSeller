@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CartCheckActivity"
+    android:background="@color/white"
+     >
+
+    <!-- 标题栏 -->
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/title_layout"
+         />
+    
+    <ListView 
+        android:id="@+id/activity_cart_check_lisview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="10dp" 
+		android:layout_marginTop="10dp"       
+        />
+
+</LinearLayout>

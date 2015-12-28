@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concernuser_listview_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10dip"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/concernuser_listview_item_header_icon"
+            android:layout_width="80dip"
+            android:layout_height="85dip"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/desc"
+            android:scaleType="centerInside"
+            android:src="@drawable/main_concern_head" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@id/concernuser_listview_item_header_icon"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/concernuser_listview_item_user_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:maxWidth="300dip"
+                android:text="@string/nickname"
+                android:textSize="@dimen/eighteen"
+                 />
+
+ 			<TextView
+ 			    android:id="@+id/concernuser_listview_item_intruce"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/concernuser_listview_item_user_name"
+				android:layout_marginTop="5dp"
+                android:text="love myself"
+                android:textColor="#ff666666"
+                android:textSize="@dimen/sixteen" />
+ 			
+            <TextView
+                android:id="@+id/concernuser_listview_item_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/concernuser_listview_item_intruce"
+				android:layout_alignParentBottom="true"
+				android:layout_marginTop="5dp"
+                android:text="2015-3-18"
+                android:textSize="@dimen/sixteen" />
+        </RelativeLayout>
+        <ImageView 
+            android:id="@+id/concernuser_listview_item_rightarrwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_concern_rightarrow"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+        <TextView 
+            android:id="@+id/concernuser_listview_item_righttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/invite_wait"
+            android:textColor="@color/orange"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+	</RelativeLayout>
+</LinearLayout>

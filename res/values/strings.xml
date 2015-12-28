@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AigzSeller</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="desc"></string>
+    <string name="network_error">Network Error</string>
+    <string name="unknown_addr">Unknown Address</string>
+    <string name="error_host">Unknown Host</string>
+    <string name="timeout">网络访问超时</string>
+    <string name="seller">商户版</string>
+    <string name="unlogin_user_name">登陆/注册</string>
+    <string name="total_income">总收入:0.00</string>
+    <string name="coupon">消费券:0.00</string>
+    <string name="couponcount">销量券:0.00</string>
+    <string name="recharge">充值</string>
+    <string name="psd">积分</string>
+
+    <!-- 充值 -->
+    <string name="recharge_psd">积分:</string>
+    <string name="recharge_psd_edittext">请输入要充值多少积分</string>
+    <string name="recharge_count">金额:</string>
+    <string name="recharge_count_edittext">请输入要充值多少金额</string>
+    <string name="str_alipay_psyment">支付宝</string>
+    <string name="str_wechat_payment">微信</string>
+
+    <!-- 积分 -->
+    <string name="mypsd">我的积分</string>
+    <string name="chargevalue">充值积分</string>
+    <string name="invitevalue">邀请返佣</string>
+    <string name="spendvalue">消费返佣</string>
+    <string name="depositvalue">提现</string>
+    <string name="title_activity_invite">InviteActivity</string>
+
+    <!-- 订单验证码 -->
+    <string name="inputcode">请输入订单验证码</string>
+
+    <!-- 我的关注 -->
+    <string name="title_activity_concernuser">ConcernuserActivity</string>
+    <string name="attention_title">我的关注</string>
+
+    <!-- 关注人资料 -->
+    <string name="title_activity_con_user_detail">ConUserDetailActivity</string>
+    <string name="attention_detail_title">资料详情</string>
+    <string name="nickname">昵称</string>
+    <string name="sex">性别</string>
+    <string name="birth">出生日期</string>
+    <string name="address">地址</string>
+
+    <!-- 预约用户 -->
+    <string name="reserationusers">预约用户</string>
+    <string name="commit_wait">等待确定</string>
+    <string name="commit_already">已经确定</string>
+    <string name="title_activity_reseration_detail">ReserationDetailActivity</string>
+
+    <!-- 预约详情 -->
+    <string name="reserationdetail">预约详情</string>
+    <string name="reserationdetail_action">活动:</string>
+    <string name="reserationdetail_datetime">时间:</string>
+    <string name="reserationdetail_personnumber">人数:</string>
+    <string name="reserationdetail_otherinfo">备注:</string>
+    <string name="reserationdetail_detail">用户向您提供预约申请,请确认!</string>
+
+    <!-- 我的邀请 -->
+    <string name="myinvite">我的邀请</string>
+    <string name="invite_totalnumber">邀请总人数</string>
+    <string name="invite_agreenumber">邀请同意人数</string>
+    <string name="invite_refusenumber">邀请拒绝人数</string>
+    <string name="invite_agree">同意邀请</string>
+    <string name="invite_wait">等待确定</string>
+    <string name="invite_number">200人</string>
+    <string name="title_activity_reseration">ReserationActivity</string>
+    <string name="title_activity_my_psd">MyPsdActivity</string>
+    <string name="title_activity_reseration_commit">ReserationCommitActivity</string>
+    <string name="title_activity_recharge">RechargeActivity</string>
+    <string name="title_activity_cart_data">CartDataActivity</string>
+
+    <!-- 卡券数据 -->
+    <string name="cartdata">卡券数据分析</string>
+    <string name="title_activity_cart_check">CartCheckActivity</string>
+    
+    <!--  卡券核销 -->
+    <string name="cartcheck">卡券核销</string>
+
+</resources>
