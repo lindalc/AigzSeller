@@ -58,5 +58,25 @@
         <item name="android:windowNoTitle">true</item>  
         <item name="android:windowIsFloating">true</item>  
     </style> 
+    
+    <!-- dialog风格 -->
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 无边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+    
+        <!-- 自定义请求dialog的风格 -->
+    <style name="RequestDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊背景 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题显示 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
 </resources>

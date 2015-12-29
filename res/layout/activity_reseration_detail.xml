@@ -193,5 +193,33 @@
                 android:text="@string/reserationdetail_detail"/>
     	</LinearLayout>
     </LinearLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="90dp"/>
+    <LinearLayout
+        android:id="@+id/activity_reseration_detail_layout" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        >
+        <ImageView 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/reseration_comit"/>
+        <TextView 
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"/>
+        <ImageView 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/reseration_cancel"/>
+    </LinearLayout>
 
 </LinearLayout>

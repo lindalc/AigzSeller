@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;  
 import android.view.ViewGroup.LayoutParams;  
 import android.widget.Button;  
+import android.widget.EditText;
 import android.widget.LinearLayout;  
 import android.widget.TextView;  
 /**
@@ -42,6 +43,7 @@ public class CustomDialog extends Dialog {
         private View contentView;  
         private DialogInterface.OnClickListener positiveButtonClickListener;  
         private DialogInterface.OnClickListener negativeButtonClickListener;  
+        private EditText edit;
   
         public Builder(Context context) {  
             this.context = context;  
@@ -61,9 +63,15 @@ public class CustomDialog extends Dialog {
         public Builder setMessage(int message) {  
             this.message = (String) context.getText(message);  
             return this;  
-        }  
+        }
+        
   
-        /** 
+        public String getMessage() {
+        	message = edit.getText().toString();
+			return message;
+		}
+
+		/** 
          * Set the Dialog title from resource 
          *  
          * @param title 
@@ -133,6 +141,7 @@ public class CustomDialog extends Dialog {
             // instantiate the dialog with the custom Theme  
             final CustomDialog dialog = new CustomDialog(context,R.style.Dialog);  
             View layout = inflater.inflate(R.layout.activity_main_code_dialog, null);  
+            edit = (EditText) layout.findViewById(R.id.message);
             dialog.addContentView(layout, new LayoutParams(  
                     LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));  
             // set the dialog title  
@@ -172,7 +181,7 @@ public class CustomDialog extends Dialog {
             }  
             // set the content message  
             if (message != null) {  
-                ((TextView) layout.findViewById(R.id.message)).setText(message);  
+                ((EditText) layout.findViewById(R.id.message)).setText(message);  
             } else if (contentView != null) {  
                 // if no message set  
                 // add the contentView to the dialog body  

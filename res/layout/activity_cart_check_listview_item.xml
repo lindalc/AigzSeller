@@ -4,63 +4,98 @@
     android:layout_height="wrap_content" 
     android:orientation="vertical">
         
-    <LinearLayout 
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_background"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:id="@+id/activity_cartcheck_listview_item_layout"
-   	 		android:layout_width="match_parent"
-   	 		android:layout_height="wrap_content"
-    		android:orientation="vertical"
-    		>
-       <RelativeLayout 
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:background="@color/orange"
-           android:orientation="horizontal"
-           android:padding="5dp">
-           <ImageView
-	           android:id="@+id/activity_cartcheck_listview_item_img_headporait" 
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:src="@drawable/ic_launcher"
-           />
-       
-	       <TextView 
-	           android:id="@+id/activity_cartcheck_listview_item_txt_cartname"
-	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:text="@string/cartcheck"
-	           android:layout_toRightOf="@id/activity_cartcheck_listview_item_img_headporait"
-	           android:textSize="25sp"
-	           android:textColor="@color/white"
-	           android:layout_centerInParent="true"
-			/>       
-       </RelativeLayout>
-       <RelativeLayout 
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textColor="#A5A5A5"
-           android:background="@color/white"
-           android:paddingTop="5dp"
-           android:padding="5dp">
-           <TextView 
-               android:id="@+id/activity_cartcheck_listview_item_txt_name"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:text="@string/cartcheck"
-	           android:textColor="#A5A5A5"
-			/>
-           <TextView 
-               android:id="@+id/activity_cartcheck_listview_item_txt_state"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:text="@string/cartcheck"
-	           android:textColor="#A5A5A5"
-	           android:layout_alignParentRight="true"
-			/>
-       </RelativeLayout>
-   </LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:background="#FA861F" >
+			<ImageView 
+			    android:layout_width="10dp"
+			    android:layout_height="10dp"
+			    android:src="@drawable/zsj"/>
+			<ImageView 
+			    android:layout_width="10dp"
+			    android:layout_height="10dp"
+			    android:layout_alignParentRight="true"
+			    android:src="@drawable/ysj"/>
+            <ImageView
+                android:id="@+id/activity_cartcheck_listview_item_img_headporait"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/main_icon_headportrait" />
+
+            <TextView
+                android:id="@+id/activity_cartcheck_listview_item_txt_cartname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@id/activity_cartcheck_listview_item_img_headporait"
+                android:text="@string/cartcheck"
+                android:textColor="#FFF"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="95dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/huabian" />
+
+        </RelativeLayout>
+
+        <RelativeLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#FFF">
+            
+			<ImageView 
+			    android:layout_width="10dp"
+			    android:layout_height="10dp"
+			    android:layout_alignParentBottom="true"
+			    android:src="@drawable/zxj"/>
+			<ImageView 
+			    android:layout_width="10dp"
+			    android:layout_height="10dp"
+			    android:layout_alignParentBottom="true"
+			    android:layout_alignParentRight="true"
+			    android:src="@drawable/yxj"/>
+
+            <TextView
+                android:id="@+id/activity_cartcheck_listview_item_txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/cartcheck" />
+		<TextView
+		    android:id="@+id/activity_cartcheck_listview_item_txt_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/cartcheck" />
+        </RelativeLayout>
+        
+    </LinearLayout>
  	<TextView 
           android:id="@+id/activity_cartcheck_listview_item_gray"
           android:layout_width="match_parent"
           android:layout_height="10dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
           android:background="@color/gray"/>
 </LinearLayout>

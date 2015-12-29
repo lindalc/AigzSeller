@@ -61,7 +61,7 @@
                 android:layout_width="114.0dip"  
                 android:layout_height="40.0dip"  
                 android:layout_marginLeft="20.0dip"  
-                android:background="@drawable/code_commit"  
+                android:background="@drawable/reseration_delete"  
                 android:gravity="center"  
                  />  
         </LinearLayout>  

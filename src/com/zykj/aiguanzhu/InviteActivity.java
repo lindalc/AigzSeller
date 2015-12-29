@@ -1,15 +1,27 @@
 package com.zykj.aiguanzhu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.android.volley.Request;
 import com.zykj.aiguanzhu.adapters.ReserationAdapter;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
+import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.parser.DataParser;
+import com.zykj.aiguanzhu.utils.HttpUtils;
+import com.zykj.aiguanzhu.utils.JsonUtils;
+import com.zykj.aiguanzhu.utils.RequestDailog;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -21,7 +33,7 @@ import android.widget.TextView;
  * @version 1.0 
  * @Description 我的邀请
  */
-public class InviteActivity extends BaseActivity {
+public class InviteActivity extends BaseActivity implements OnItemClickListener{
 
 	private Context mContext = InviteActivity.this;
 	private int curPosition;
@@ -63,17 +75,29 @@ public class InviteActivity extends BaseActivity {
 		
 		listview = (ListView) findViewById(R.id.acitivity_invite_listview);
 		listReseration = new ArrayList<ReserationUser>();
-//需替换的数据Start
-		ReserationUser aUser = new ReserationUser(null,"用户1",null,"蒙山生态火锅","2015-11-20",1,3);
-		ReserationUser bUser = new ReserationUser(null,"用户2",null,"蒙山生态火锅","2015-11-20",1,0);
-		
-		listReseration.add(aUser);
-		listReseration.add(bUser);
-		
-//End
+
 		adapterReseration = new ReserationAdapter(mContext,listReseration);
 		listview.setAdapter(adapterReseration);
+		
+		RequestDailog.showDialog(this, "请稍后");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("merchantid", "1");
+		String json = JsonUtils.toJson(map);
+		//TODO 解析数据，接收handler 
+//		DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);
+		
+		listview.setOnItemClickListener(this);
 	}
+	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case DataConstants.MAINACTIVITY_INVITE:
+				
+				break;
+			}
+		};
+	};
 	
 	 /*
 		 * 按钮点击事件
@@ -93,6 +117,15 @@ public class InviteActivity extends BaseActivity {
 			default:
 				break;
 			}
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(mContext, MyYaoQingRenActivity.class);
+			startActivity(intent);
 		}
 	
 }

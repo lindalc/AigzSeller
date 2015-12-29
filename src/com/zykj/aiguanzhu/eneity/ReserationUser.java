@@ -44,20 +44,6 @@ public class ReserationUser {
     private int reseratid;
     private int rstate;
     
-    
-    
-	public ReserationUser(String sign, String username, String headportain,
-			String goodname, String datetime, int reseratid, int rstate) {
-		super();
-		this.sign = sign;
-		this.username = username;
-		this.headportain = headportain;
-		this.goodname = goodname;
-		this.datetime = datetime;
-		this.reseratid = reseratid;
-		this.rstate = rstate;
-	}
-	
 	public String getSign() {
 		return sign;
 	}

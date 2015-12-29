@@ -22,22 +22,78 @@ public class DataConstants {
 	
 	public static final String ERROR = "{\"code\":400,\"message\":\"请求失败\",\"datas\":null}";
 	public static final String jsonData = "datas";
+	/**
+	 * 存储的sharePerfence
+	 */
+	public static final String config = "config";
+	/**
+	 * mob短信验证APP Key
+	 * 
+	 */
+	public static final String APPKey_mob = "deadc288e612";
+	/**
+	 * mob短信验证SECRE
+	 */
+	public static final String APP_SECRE = "4e3cb936a3af97ad37e776eb37820832";
 	
 //////////////////////////////////商户版主页 START ///////////////////////////////
 	/**
+	 * 登陆
+	 */
+	public static final int MAINACTIVITY_LOGIN = 0x0001001;
+	/**
 	 * 充值
 	 */
-	public static final int MAINACTIVITY_RECHARGE = 0x0001001;
+	public static final int MAINACTIVITY_RECHARGE = 0x0001002;
 	/**
 	 * 积分
 	 */
-	public static final int MAINACTIVITY_PSD = 0x0001002;
+	public static final int MAINACTIVITY_PSD = 0x0001003;
+	/**
+	 * 验证码
+	 */
+	public static final int MAINACTIVITY_CODE = 0x0001004;
+	/**
+	 * 关注用户
+	 */
+	public static final int MAINACTIVITY_ATTENTION = 0x0001005;
+	/**
+	 * 用户资料
+	 */
+	public static final int MAINACTIVITY_ATTENTIONDEAIL = 0x0001006;
+	/**
+	 * 我的邀请
+	 */
+	public static final int MAINACTIVITY_INVITE = 0x0001007;
+	/**
+	 * 预约用户
+	 */
+	public static final int MAINACTIVITY_RESERATIONUSER = 0x0001008;
+	/**
+	 * 预约详情
+	 */
+	public static final int MAINACTIVITY_RESERATIONDETAIL = 0x0001009;
+	
 //////////////////////////////////商户版主页 END ////////////////////////////////
 //////////////////////////////////关注用户 START ///////////////////////////////
 	/**
 	 * 关注用户解析数据标识
 	 */
-	public static final int ACTION_SEND_ATTENTIONUSER = 0x0002001;
+	public static final int ACTION_SEND_ATTENTIONUSER = 0x0005001;
 //////////////////////////////////关注用户 END ////////////////////////////////
+//////////////////////////////////预约 START ///////////////////////////////
+	/**
+	 * 删除预约
+	 */
+	public static final int RESERATION_DELETE = 0x0008001;
+	/**
+	 * 确认预约
+	 */
+	public static final int RESERATION_COMMIT = 0x0008002;
+	/**
+	 * 取消预约
+	 */
+	public static final int RESERATION_CANCEL = 0x0008003;
+//////////////////////////////////预约 END ///////////////////////////////
 	
 }

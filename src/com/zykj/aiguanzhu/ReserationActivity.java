@@ -1,12 +1,21 @@
 package com.zykj.aiguanzhu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.android.volley.Request;
 import com.zykj.aiguanzhu.adapters.ReserationAdapter;
 import com.zykj.aiguanzhu.custome.ReserationDeleteDialog;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
+import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.parser.DataParser;
+import com.zykj.aiguanzhu.utils.HttpUtils;
+import com.zykj.aiguanzhu.utils.JsonUtils;
+import com.zykj.aiguanzhu.utils.RequestDailog;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author lc
  * @date 创建时间：2015-12-25 下午4:24:37
  * @version 1.0 
- * @Description 我的预约
+ * @Description 预约确定
  */
 public class ReserationActivity extends BaseActivity {
 
@@ -61,18 +70,8 @@ public class ReserationActivity extends BaseActivity {
 		
 		listView = (ListView) findViewById(R.id.activity_concemuser_listview);
 		listReseration = new ArrayList<ReserationUser>();
-//需替换的数据Start
-		ReserationUser aUser = new ReserationUser(null,"用户1",null,"蒙山生态火锅","2015-11-20",1,3);
-		ReserationUser bUser = new ReserationUser(null,"用户2",null,"蒙山生态火锅","2015-11-20",1,0);
-		
-		if(aUser.getRstate()==3){
-			listReseration.add(aUser);
-		}
-		if(bUser.getRstate()==3){
-			listReseration.add(bUser);
-		}
-		
-//End
+
+
 		adapterReseration = new ReserationAdapter(mContext,listReseration);
 		listView.setAdapter(adapterReseration);
 		
@@ -106,7 +105,37 @@ public class ReserationActivity extends BaseActivity {
 				}
 			}
 		});
+		
+		RequestDailog.showDialog(mContext, "请稍后");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("merchantid", "1");
+		map.put("pagenumber", "1");
+		map.put("pagesize", "10");
+		String json = JsonUtils.toJson(map);
+		DataParser.getReserationUser(mContext, Request.Method.GET, HttpUtils.url_reserationUser(json), null, handler);
 	}
+	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case DataConstants.MAINACTIVITY_RESERATIONUSER:
+				RequestDailog.closeDialog();
+				
+				ArrayList<ReserationUser> list = (ArrayList<ReserationUser>) msg.obj;
+				
+				for(int i=0;i<list.size();i++){
+					if(list.get(i).getRstate()==1){
+						listReseration.add(list.get(i));
+					}
+				}
+				
+				adapterReseration.notifyDataSetChanged();
+				
+				break;
+			default:break;
+			}
+		};
+	};
 	
 	 /*
 		 * 按钮点击事件

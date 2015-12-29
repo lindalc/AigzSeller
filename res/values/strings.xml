@@ -17,6 +17,8 @@
     <string name="couponcount">销量券:0.00</string>
     <string name="recharge">充值</string>
     <string name="psd">积分</string>
+    <string name="quit">退出</string>
+    
 
     <!-- 充值 -->
     <string name="recharge_psd">积分:</string>
@@ -34,9 +36,19 @@
     <string name="depositvalue">提现</string>
     <string name="title_activity_invite">InviteActivity</string>
 
+    <!-- 二维码 -->
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
     <!-- 订单验证码 -->
     <string name="inputcode">请输入订单验证码</string>
-
+    
+    <!--  订单详情 -->
+	<string name="dingdanqueren">亲，订单确认成功</string>
+	<string name="dingdanbianhao">订单编号:00000</string>
+	<string name="dingdantime">确认时间：0000</string>
+	<string name="dingdanmoney">金额：20.0</string>
+	
+	 
     <!-- 我的关注 -->
     <string name="title_activity_concernuser">ConcernuserActivity</string>
     <string name="attention_title">我的关注</string>
@@ -80,8 +92,13 @@
     <!-- 卡券数据 -->
     <string name="cartdata">卡券数据分析</string>
     <string name="title_activity_cart_check">CartCheckActivity</string>
-    
-    <!--  卡券核销 -->
+
+    <!-- 卡券核销 -->
     <string name="cartcheck">卡券核销</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
+    <string name="title_activity_my_yao_qing_ren">MyYaoQingRenActivity</string>
+    <string name="title_activity_ding_dan_que_ren">DingDanQueRenActivity</string>
 
 </resources>

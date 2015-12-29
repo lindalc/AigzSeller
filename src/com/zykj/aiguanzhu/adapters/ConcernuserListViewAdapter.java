@@ -1,14 +1,27 @@
 package com.zykj.aiguanzhu.adapters;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageCache;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.zykj.aiguanzhu.ConUserDetailActivity;
 import com.zykj.aiguanzhu.R;
 import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.utils.BitmapCache;
+import com.zykj.aiguanzhu.utils.HttpUtils;
+import com.zykj.aiguanzhu.utils.ImageUtils;
+import com.zykj.aiguanzhu.utils.ToolsUtil;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,26 +99,43 @@ public class ConcernuserListViewAdapter extends BaseAdapter {
 			view.setTag(holder);
 		}
 		
-		/**
-		 * 假数据  架构中没写图片处理以及缓存,所以可以用Picasso.with(mContext).fron(string).into(holder.img_head);
-		 */
-		holder.txt_username.setText("赵晓欢");
-		holder.txt_intruce.setText("爱关注,爱生活,做最好的自己!");
-		holder.txt_date.setText("2015-3-18");
-		holder.img_head.setImageResource(R.drawable.main_concern_head);
+		final AttentionUser aUser = list.get(position);
+		holder.txt_username.setText(aUser.getName());
+		holder.txt_intruce.setText(aUser.getSign());
+		holder.txt_date.setText(aUser.getIntime());
+		final ViewHolder h = holder;
+		
+		Picasso.with(mContext).load(HttpUtils.img_url+aUser.getHeadportain()).placeholder(R.drawable.main_icon_headportrait).resize(70, 70) .centerCrop().into(holder.img_head);
+		
+//		boolean isFileExist = ImageUtils.isFileExist(HttpUtils.img_url+aUser.getHeadportain(), mContext);
+//		
+//		Bitmap bitmap = null;
+//		if (isFileExist) {
+//			bitmap = ImageUtils.getBitmap2(HttpUtils.img_url+aUser.getHeadportain(), mContext,80,80);
+//			
+//			ToolsUtil.print("----", "bitmap = "+bitmap);
+//			h.img_head.setImageBitmap(bitmap);
+//		}else {
+//			//如果有网络的话，再通过vollery调用
+//			ImageUtils.load(mContext, h.img_head, HttpUtils.img_url+aUser.getHeadportain(), 80, 80);
+//			ImageUtils.saveBitmap2(bitmap, HttpUtils.img_url+aUser.getHeadportain(), mContext);
+//		}
+//		
+//		bitmap = null;
+		
 		
 		holder.img_rightarrow.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mContext,ConUserDetailActivity.class);
-				int id = list.get(curPosition).getUserid();
-				Bundle bundle = new Bundle();
-				bundle.putInt("id", id);
-				intent.putExtras(bundle);
+				intent.putExtra("id", aUser.getUserid());
+				intent.putExtra("name", aUser.getName());
 				mContext.startActivity(intent);
 			}
 		});
+		
+		
 		
 		return view;
 	}

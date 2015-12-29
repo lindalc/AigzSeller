@@ -14,10 +14,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zykj.aiguanzhu.ConUserDetailActivity;
 import com.zykj.aiguanzhu.R;
 import com.zykj.aiguanzhu.adapters.ConcernuserListViewAdapter.ViewHolder;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
+import com.zykj.aiguanzhu.utils.HttpUtils;
 
 /**
  * @author  lc 
@@ -88,11 +90,10 @@ public class ReserationAdapter extends BaseAdapter {
 		holder.txt_date.setTextColor(Color.GRAY);
 		if(reserationUser.getRstate() == 0){
 			holder.txt_right.setText("等待确定");
-		}else if(reserationUser.getRstate() == 3){
+		}else if(reserationUser.getRstate() == 1){
 			holder.txt_right.setText("已经确定");
 		}
-		holder.img_head.setImageResource(R.drawable.main_concern_head);
-		
+		Picasso.with(mContext).load(HttpUtils.img_url+reserationUser.getHeadportain()).placeholder(R.drawable.main_icon_headportrait).resize(70, 70).into(holder.img_head);
 		
 		
 		return view;

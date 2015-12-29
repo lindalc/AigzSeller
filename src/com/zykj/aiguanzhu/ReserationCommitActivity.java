@@ -1,12 +1,21 @@
 package com.zykj.aiguanzhu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.android.volley.Request;
 import com.zykj.aiguanzhu.adapters.ReserationAdapter;
 import com.zykj.aiguanzhu.custome.ReserationDeleteDialog;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
+import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.parser.DataParser;
+import com.zykj.aiguanzhu.utils.HttpUtils;
+import com.zykj.aiguanzhu.utils.JsonUtils;
+import com.zykj.aiguanzhu.utils.RequestDailog;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +23,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author lc
  * @date 创建时间：2015-12-25 下午4:24:26
  * @version 1.0 
- * @Description 预约确定
+ * @Description 预约用户
  */
 public class ReserationCommitActivity extends BaseActivity {
 
@@ -62,27 +72,25 @@ public class ReserationCommitActivity extends BaseActivity {
 		listView = (ListView) findViewById(R.id.activity_concemuser_listview);
 		listView.setVisibility(View.VISIBLE);
 		listReseration = new ArrayList<ReserationUser>();
-//需替换的数据Start
-		ReserationUser aUser = new ReserationUser(null,"用户1",null,"蒙山生态火锅","2015-11-20",1,3);
-		ReserationUser bUser = new ReserationUser(null,"用户2",null,"蒙山生态火锅","2015-11-20",1,0);
-		listReseration.add(aUser);
-		listReseration.add(bUser);
-		
-//End
+
 		adapterReseration = new ReserationAdapter(mContext,listReseration);
 		listView.setAdapter(adapterReseration);
 		
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		RequestDailog.showDialog(mContext, "请稍后");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pagesize", "10");
+		map.put("pagenumber", "1");
+		map.put("merchantid", "1");
+		String json = JsonUtils.toJson(map);
+		DataParser.getReserationUser(mContext, Request.Method.GET, HttpUtils.url_reserationUser(json), null, handler);
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				curPosition = arg2;
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
 				rstate = listReseration.get(curPosition).getRstate();
-				if(rstate == 0){  // TODO 解析数据后,把0和3换为解析出来的rstate 也就是状态码,如果是等待预约,则跳转页面,否则就弹出是否销毁    预约状态rstate(0-预约申请,1-预约同意 2-预约取消 3-预约完成)
-					Intent intent = new Intent(mContext,ReserationDetailActivity.class);
-				    intent.putExtra("reserationid", listReseration.get(curPosition).getReseratid());
-					startActivity(intent);
-				}else if(rstate ==3){
+				if(rstate == 2){
 					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
 			        builder.setTitle("温馨提醒!");
 			        builder.setMessage("是否确定删除此条预约信息");
@@ -90,7 +98,12 @@ public class ReserationCommitActivity extends BaseActivity {
 			            public void onClick(DialogInterface dialog, int which) {  
 			                dialog.dismiss();  
 			                //设置你的操作事项  
-			                listReseration.remove(curPosition);
+			                Map<String, String> map = new HashMap<String, String>();
+			        		map.put("reserationid", "1");
+			        		String json = JsonUtils.toJson(map);
+			        		DataParser.getReserationDelete(mContext, Request.Method.GET, HttpUtils.url_reserationDelete(json), null, handler);
+			        		
+			        		//TODO 删除
 			                adapterReseration.notifyDataSetChanged();
 			            }  
 			        });  
@@ -104,9 +117,42 @@ public class ReserationCommitActivity extends BaseActivity {
 			  
 			        builder.create().show();  
 				}
+				return false;
+			}
+		});
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				curPosition = arg2;
+				rstate = listReseration.get(curPosition).getRstate();
+				Intent intent = new Intent(mContext,ReserationDetailActivity.class);
+				intent.putExtra("rstate", rstate);
+			    intent.putExtra("reserationid", listReseration.get(curPosition).getReseratid());
+				startActivity(intent);
 			}
 		});
 	}
+	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+			case DataConstants.MAINACTIVITY_RESERATIONUSER:
+				RequestDailog.closeDialog();
+				ArrayList<ReserationUser> list = (ArrayList<ReserationUser>) msg.obj;
+				
+				listReseration.addAll(list);
+				adapterReseration.notifyDataSetChanged();
+				
+				break;
+			case DataConstants.RESERATION_DELETE:
+				// TODO 删除预约
+				break;
+			default:break;
+			}
+		};
+	};
 	
 	 /*
 		 * 按钮点击事件
@@ -123,6 +169,15 @@ public class ReserationCommitActivity extends BaseActivity {
 			default:
 				break;
 			}
+		}
+		
+		@Override
+		protected void onStop() {
+			// TODO Auto-generated method stub
+			super.onStop();
+			DataParser.cancel(mContext);
+			listView = null;
+			System.gc();
 		}
 
 }

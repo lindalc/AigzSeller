@@ -7,5 +7,8 @@
     <color name="title_color">#f6f6f6</color>
     <color name="backgroud_color">#f6f6f6</color>
     <color name="orange">#ff8839</color>
-    
+    <color name="background_color">#f5f0ea</color>
+    <color name="result_view">#b0000000</color>
+	<color name="viewfinder_mask">#60000000</color>
+	<color name="possible_result_points">#c0ffff00</color> 
 </resources>

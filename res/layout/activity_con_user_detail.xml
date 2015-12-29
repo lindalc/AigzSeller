@@ -25,6 +25,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/main_icon_headportrait"/>
     	<TextView 
+    	    android:id="@+id/con_user_detail_name"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_toRightOf="@id/con_user_detail_headporait"
@@ -59,6 +60,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/nickname"/>
             <TextView 
+                android:id="@+id/con_user_detail_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -85,6 +87,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/sex"/>
             <TextView 
+                android:id="@+id/con_user_detail_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -111,6 +114,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/birth"/>
             <TextView 
+                android:id="@+id/con_user_detail_birth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -137,6 +141,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/address"/>
             <TextView 
+                android:id="@+id/con_user_detail_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
