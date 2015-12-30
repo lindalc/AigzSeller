@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
         
      <LinearLayout 
         android:layout_width="fill_parent"
@@ -26,7 +27,7 @@
 			    android:layout_height="10dp"
 			    android:layout_alignParentRight="true"
 			    android:src="@drawable/ysj"/>
-            <ImageView
+            <com.zykj.aiguanzhu.custome.CustomImageView
                 android:id="@+id/activity_cartcheck_listview_item_img_headporait"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
@@ -47,11 +48,12 @@
                 android:textSize="26sp" />
 
             <ImageView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_marginTop="95dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/huabian" />
+                android:src="@drawable/huabian"
+                android:scaleType="fitXY" />
 
         </RelativeLayout>
 
@@ -91,11 +93,11 @@
         </RelativeLayout>
         
     </LinearLayout>
- 	<TextView 
-          android:id="@+id/activity_cartcheck_listview_item_gray"
-          android:layout_width="match_parent"
-          android:layout_height="10dp"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:background="@color/gray"/>
+    <TextView
+        android:id="@+id/activity_cartcheck_listview_item_gray"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+        	android:layout_marginRight="10dp"
+            android:background="#EEEEEE"/>
 </LinearLayout>

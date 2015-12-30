@@ -13,7 +13,9 @@
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"  
+   		android:focusableInTouchMode="true">
         <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -66,83 +68,115 @@
             android:layout_height="10dp"
             android:background="@color/gray"/>
         
-        <!--  支付 -->
-        <LinearLayout
+        <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:id="@+id/id_alipay_psyment"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:layout_marginTop="0.5dip"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:contentDescription="@string/desc"
-                    android:src="@drawable/ic_launcher" />
-                
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="@string/str_alipay_psyment"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/desc"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-            
-            <TextView 
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
-
-            <LinearLayout
-                android:id="@+id/id_wechat_payment"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:layout_marginTop="0.5dip"
-                android:orientation="horizontal" >
-                
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:contentDescription="@string/desc"
-                    android:src="@drawable/ic_launcher" />
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="@string/str_wechat_payment"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/desc"
-                    android:src="@drawable/ic_launcher" />
-            </LinearLayout>
-
-        </LinearLayout>
-        
+            android:orientation="horizontal">
+	        <!--  支付 -->
+	        <LinearLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="4"
+	            android:orientation="vertical" >
+	
+	            <LinearLayout
+	                android:id="@+id/id_alipay_psyment"
+	                android:layout_width="match_parent"
+	                android:layout_height="50dp"
+	                android:background="@color/white"
+	                android:gravity="center_vertical"
+	                android:layout_marginTop="0.5dip"
+	                android:orientation="horizontal" >
+	
+	                <ImageView
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="20dp"
+	                    android:contentDescription="@string/desc"
+	                    android:src="@drawable/pay_alipay" />
+	                
+	                <TextView
+	                    android:layout_width="0dip"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="15dp"
+	                    android:layout_weight="1"
+	                    android:text="@string/str_alipay_psyment"
+	                    android:textSize="16sp" />
+	            </LinearLayout>
+	            
+	            <TextView 
+	                android:layout_width="match_parent"
+	                android:layout_height="1dp"
+	                android:background="@color/gray"/>
+	
+	            <LinearLayout
+	                android:id="@+id/id_wechat_payment"
+	                android:layout_width="fill_parent"
+	                android:layout_height="50dp"
+	                android:background="@color/white"
+	                android:gravity="center_vertical"
+	                android:layout_marginTop="0.5dip"
+	                android:orientation="horizontal" >
+	                
+	                <ImageView
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="20dp"
+	                    android:contentDescription="@string/desc"
+	                    android:src="@drawable/pay_wechat" />
+	
+	                <TextView
+	                    android:layout_width="0dip"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="15dp"
+	                    android:layout_weight="1"
+	                    android:text="@string/str_wechat_payment"
+	                    android:textSize="16sp" />
+	            </LinearLayout>
+	
+	        </LinearLayout>
+			<RadioGroup 
+			    android:id="@+id/activity_recharge_radiogroup"
+			    android:layout_width="0dp"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:orientation="vertical"
+			    android:background="@color/white"
+			    android:gravity="center">
+			    <RadioButton 
+			        android:id="@+id/recharge_alipay"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/paybtn_selector"
+                    android:checked="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+			        />
+			    <View 
+			        android:layout_width="match_parent"
+			        android:layout_height="1dp"
+			        android:background="@color/gray"/>
+			    <RadioButton 
+		            android:id="@+id/recharge_wechat"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/paybtn_selector"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+			        />
+			</RadioGroup>
+		</LinearLayout>
+        <Button 
+            android:id="@+id/recharge_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/recharge_commit"
+            android:textColor="@color/white"
+            android:background="@color/orange"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="70dp"
+            />
     </LinearLayout>
 
 </LinearLayout>

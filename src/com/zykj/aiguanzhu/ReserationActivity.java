@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,28 +82,9 @@ public class ReserationActivity extends BaseActivity {
 					long arg3) {
 				curPosition = arg2;
 				rstate = listReseration.get(curPosition).getRstate();
-				if(rstate ==3){
-					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
-			        builder.setTitle("温馨提醒!");
-			        builder.setMessage("是否确定删除此条预约信息");
-			        builder.setPositiveButton("", new DialogInterface.OnClickListener() {  
-			            public void onClick(DialogInterface dialog, int which) {  
-			                dialog.dismiss();  
-			                //设置你的操作事项  
-			                listReseration.remove(curPosition);
-			                adapterReseration.notifyDataSetChanged();
-			            }  
-			        });  
-			  
-			        builder.setNegativeButton("",  
-			                new android.content.DialogInterface.OnClickListener() {  
-			                    public void onClick(DialogInterface dialog, int which) {  
-			                        dialog.dismiss();
-			                    }  
-			                });  
-			  
-			        builder.create().show();  
-				}
+				Intent intent = new Intent(mContext,ReserationDetailActivity.class);
+				intent.putExtra("rstate", rstate);
+				startActivity(intent);
 			}
 		});
 		
@@ -119,8 +101,8 @@ public class ReserationActivity extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){
 			case DataConstants.MAINACTIVITY_RESERATIONUSER:
+				listReseration.clear();
 				RequestDailog.closeDialog();
-				
 				ArrayList<ReserationUser> list = (ArrayList<ReserationUser>) msg.obj;
 				
 				for(int i=0;i<list.size();i++){

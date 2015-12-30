@@ -12,7 +12,6 @@
     
     <!-- 上部头像等信息区域 -->
     <LinearLayout 
-            android:id="@+id/main_headportrait"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:background="@drawable/main_bg_headportrait"
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
              android:layout_gravity="center_horizontal"
             >
-        <ImageView 
+        <com.zykj.aiguanzhu.custome.CustomImageView
             android:id="@+id/main_img_headportrait"
             android:layout_width="60dp"
             android:layout_height="60dp"

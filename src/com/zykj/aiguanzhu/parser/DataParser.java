@@ -25,6 +25,8 @@ import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.eneity.AttentionUserDetail;
+import com.zykj.aiguanzhu.eneity.CartCheck;
+import com.zykj.aiguanzhu.eneity.Dingdan;
 import com.zykj.aiguanzhu.eneity.MyIntegral;
 import com.zykj.aiguanzhu.eneity.ReserationDetail;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
@@ -127,7 +129,7 @@ public class DataParser {
 	 * @param json
 	 * @param handler
 	 */
-   public static void getMyPsdJson(final Context mContext,int method,String url,JsonObject json,final Handler handler){
+   public static void getMyPsdJson(final Context mContext,int method,String url,JsonObject json,final Handler handler,final int i){
 	   ToolsUtil.print("----", "url:"+url);
 	   mRequestQueue =  Volley.newRequestQueue(mContext);  
 	   JsonObjectRequest jr = new JsonObjectRequest(method, url, null, new Response.Listener<JSONObject>() {
@@ -136,29 +138,48 @@ public class DataParser {
 			
 			JSONObject status;
 			try {
-				status = response.getJSONObject("status");
-				String succeed = status.getString("succeed");
-				ToolsUtil.print("----", "succeed:"+succeed);
-				if (succeed.equals("1")) //成功
-				{
-					JSONObject data = response.getJSONObject("data");
-					String chargevalue = data.optString("chargevalue");
-					String drawvalue = data.optString("drawvalue");
-					String rebatevalue = data.optString("rebatevalue");
-					String histotalvalue = data.optString("histotalvalue");
-					String remainvalue = data.optString("remainvalue");
-					
-					MyIntegral mPsd = new MyIntegral();
-					mPsd.setChargevalue(chargevalue);
-					mPsd.setDrawvalue(drawvalue);
-					mPsd.setRebatevalue(rebatevalue);
-					mPsd.setHistotalvalue(histotalvalue);
-					mPsd.setRemainvalue(remainvalue);
-					
-					Message msg = new Message();
-					msg.what = DataConstants.MAINACTIVITY_PSD;
-					msg.obj = mPsd;
-					handler.sendMessage(msg);
+				if(i == 0){ // 积分
+					status = response.getJSONObject("status");
+					String succeed = status.getString("succeed");
+					ToolsUtil.print("----", "succeed:"+succeed);
+					if (succeed.equals("1")) //成功
+					{
+						JSONObject data = response.getJSONObject("data");
+						String chargevalue = data.optString("chargevalue");
+						String drawvalue = data.optString("drawvalue");
+						String rebatevalue = data.optString("rebatevalue");
+						String histotalvalue = data.optString("histotalvalue");
+						String remainvalue = data.optString("remainvalue");
+						
+						MyIntegral mPsd = new MyIntegral();
+						mPsd.setChargevalue(chargevalue);
+						mPsd.setDrawvalue(drawvalue);
+						mPsd.setRebatevalue(rebatevalue);
+						mPsd.setHistotalvalue(histotalvalue);
+						mPsd.setRemainvalue(remainvalue);
+						
+						Message msg = new Message();
+						msg.what = DataConstants.MAINACTIVITY_PSD;
+						msg.obj = mPsd;
+						handler.sendMessage(msg);
+					}
+				}else if(i == 1){ //积分变化
+					status = response.getJSONObject("status");
+					String succeed = status.getString("succeed");
+					ToolsUtil.print("----", "succeed:"+succeed);
+					if (succeed.equals("1")) //成功
+					{
+						JSONArray data = response.getJSONArray("data");
+						
+						ArrayList<MyIntegral> integral = new ArrayList<MyIntegral>();
+						
+						integral = new Gson().fromJson(data.toString(), new TypeToken<ArrayList<MyIntegral>>(){}.getType());
+			
+						Message msg = new Message();
+						msg.what = DataConstants.MAINACIVITY_INTEGRALLIST;
+						msg.obj = integral;
+						handler.sendMessage(msg);
+					}
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -350,12 +371,19 @@ public class DataParser {
 			try {
 				status = response.getJSONObject("status");
 				String succeed = status.getString("succeed");
-				String errdesc = status.getString("errdesc");
-				ToolsUtil.print("----", "succeed:"+succeed);
-				Message msg = new Message();
-				msg.what = DataConstants.MAINACTIVITY_CODE;
-				msg.obj = errdesc;
-				handler.sendMessage(msg);
+				if (succeed.equals("1")) //成功
+				{
+					JSONObject data = response.getJSONObject("data");
+					
+					Dingdan dingdan = new Dingdan();
+					
+					dingdan = new Gson().fromJson(data.toString(), new TypeToken<Dingdan>(){}.getType());
+					
+					Message msg = new Message();
+					msg.what = DataConstants.MAINACTIVITY_CODE;
+					msg.obj = dingdan;
+					handler.sendMessage(msg);
+				}
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -471,6 +499,152 @@ public class DataParser {
 	   mRequestQueue.add(jr);  
    }
    
+   /**
+    * 卡券核销
+    * @param mContext
+    * @param method
+    * @param url
+    * @param json
+    * @param handler
+    */
+   public static void getCartCheck(final Context mContext,int method,String url,JsonObject json,final Handler handler){
+	   ToolsUtil.print("----", "url:"+url);
+	   mRequestQueue =  Volley.newRequestQueue(mContext);  
+	   JsonObjectRequest jr = new JsonObjectRequest(method, url, null, new Response.Listener<JSONObject>() {
+		@Override
+		public void onResponse(JSONObject response) {
+			
+			JSONObject status;
+			try {
+				status = response.getJSONObject("status");
+				String succeed = status.getString("succeed");
+				ToolsUtil.print("----", "succeed:"+succeed);
+				if (succeed.equals("1")) //成功
+				{
+					JSONArray data = response.getJSONArray("data");
+					
+					ArrayList<CartCheck> list = new ArrayList<CartCheck>();
+					
+					list = new Gson().fromJson(data.toString(), new TypeToken<ArrayList<CartCheck>>(){}.getType());
+					
+					Message msg = new Message();
+					msg.what = DataConstants.MAINACTIVITY_CARTCHECK;
+					msg.obj = list;
+					handler.sendMessage(msg);
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		   
+	   }, new Response.ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			RequestDailog.closeDialog();
+            ToolsUtil.print("----","ErrorResponse="+error.getMessage());
+            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_LONG).show();
+		}
+	});
+	   mRequestQueue.add(jr);  
+   }
+   
+   /**
+    * 确认订单
+    * @param mContext
+    * @param method
+    * @param url
+    * @param json
+    * @param handler
+    */
+   public static void getConfirm(final Context mContext,int method,String url,JsonObject json,final Handler handler){
+	   ToolsUtil.print("----", "url:"+url);
+	   mRequestQueue =  Volley.newRequestQueue(mContext);  
+	   JsonObjectRequest jr = new JsonObjectRequest(method, url, null, new Response.Listener<JSONObject>() {
+		@Override
+		public void onResponse(JSONObject response) {
+			
+			JSONObject status;
+			try {
+				status = response.getJSONObject("status");
+				String succeed = status.getString("succeed");
+				if (succeed.equals("1")) //成功
+				{
+					JSONObject data = response.getJSONObject("data");
+					
+					Dingdan aUser = new Dingdan();
+					
+					aUser = new Gson().fromJson(data.toString(), new TypeToken<Dingdan>(){}.getType());
+					ToolsUtil.print("----", "aUser:"+aUser);
+					
+					Message msg = new Message();
+					msg.what = DataConstants.DINGDAN_CONFIRM;
+					msg.obj = aUser;
+					handler.sendMessage(msg);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		   
+	   }, new Response.ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			RequestDailog.closeDialog();
+            ToolsUtil.print("----","ErrorResponse="+error.getMessage());
+            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_LONG).show();
+		}
+	});
+	   mRequestQueue.add(jr);  
+   }
+   
+   /**
+    * 修改预约状态
+    * @param mContext
+    * @param method
+    * @param url
+    * @param json
+    * @param handler
+    */
+   public static void getReserationUpdate(final Context mContext,int method,String url,JsonObject json,final Handler handler){
+	   ToolsUtil.print("----", "url:"+url);
+	   mRequestQueue =  Volley.newRequestQueue(mContext);  
+	   JsonObjectRequest jr = new JsonObjectRequest(method, url, null, new Response.Listener<JSONObject>() {
+		@Override
+		public void onResponse(JSONObject response) {
+			
+			JSONObject status;
+			try {
+				status = response.getJSONObject("status");
+				String succeed = status.getString("succeed");
+				String errdesc = status.getString("errdesc");
+				ToolsUtil.print("----", "succeed:"+succeed);
+				Message msg = new Message();
+				msg.what = DataConstants.RESERATION_DETAIL;
+				msg.obj = errdesc;
+				handler.sendMessage(msg);
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		   
+	   }, new Response.ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			RequestDailog.closeDialog();
+            ToolsUtil.print("----","ErrorResponse="+error.getMessage());
+            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_LONG).show();
+		}
+	});
+	   mRequestQueue.add(jr);  
+   }
    
    
 }

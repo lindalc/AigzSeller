@@ -22,7 +22,10 @@ import com.example.qr_codescan.MipcaActivityCapture;
 import com.squareup.picasso.Picasso;
 import com.zykj.aiguanzhu.adapters.MainGridviewAdapter;
 import com.zykj.aiguanzhu.custome.CustomDialog;
+import com.zykj.aiguanzhu.custome.CustomImageView;
+import com.zykj.aiguanzhu.custome.QuitDialog;
 import com.zykj.aiguanzhu.custome.ReserationDeleteDialog;
+import com.zykj.aiguanzhu.eneity.Dingdan;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
@@ -58,7 +61,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 	
 	// 头像
 	private LinearLayout head_img;
-	private ImageView img;
+	private CustomImageView img;
 	private TextView txt_name,txt_total,txt_spend,txt_count;
 	
 	/**
@@ -85,7 +88,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
     	rechargeLayout.setOnClickListener(this);
     	psdLayout.setOnClickListener(this);
     	
-    	img = (ImageView) findViewById(R.id.main_img_headportrait);
+    	img = (CustomImageView) findViewById(R.id.main_img_headportrait);
     	txt_name = (TextView) findViewById(R.id.main_text_name);
     	txt_total = (TextView) findViewById(R.id.main_txt_total_income);
     	txt_spend = (TextView) findViewById(R.id.main_txt_coupon);
@@ -135,7 +138,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			break;
 		case R.id.right_text_btn:
 			// TODO 退出
-			ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
+			QuitDialog.Builder builder = new QuitDialog.Builder(mContext);  
 	        builder.setTitle("温馨提醒!");
 	        builder.setMessage("您确定要退出该账号吗");
 	        builder.setPositiveButton("", new DialogInterface.OnClickListener() {  
@@ -183,7 +186,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			// 积分
 			if(isLoged()){
 				Intent psdIntent = new Intent();
-				intentJump(psdIntent,MyPsdActivity.class,DataConstants.MAINACTIVITY_PSD);
+				intentJump(psdIntent,MyIntegralActivity.class,DataConstants.MAINACTIVITY_PSD);
 			}else{
 				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
 			}
@@ -248,16 +251,16 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			break;
 		case 3: // 3 预约用户
 			if(isLoged()){
-				Intent reserationUsersIntent = new Intent();
-				intentJump(reserationUsersIntent,ReserationCommitActivity.class,position);
+				Intent reserationCommitIntent = new Intent();
+				intentJump(reserationCommitIntent,ReserationActivity.class,position);
 			}else{
 				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
 			}
 			break;
 		case 4: // 4 预约确定
 			if(isLoged()){
-				Intent reserationCommitIntent = new Intent();
-				intentJump(reserationCommitIntent,ReserationActivity.class,position);
+				Intent reserationUsersIntent = new Intent();
+				intentJump(reserationUsersIntent,ReserationCommitActivity.class,position);
 			}else{
 				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
 			}
@@ -309,17 +312,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case DataConstants.MAINACTIVITY_CODE:
-				String errdesc = (String) msg.obj;
+				Dingdan dingdan = (Dingdan) msg.obj;
 				
-				if(errdesc.equals("确认订单成功")){
-					Intent dingdanIntent = new Intent();
-					intentJump(dingdanIntent, DingDanQueRenActivity.class, -2);
-				}else{
-					Toast.makeText(mContext, errdesc, Toast.LENGTH_LONG).show();
-				}
-				
+				Intent dingdanIntent = new Intent();
+				dingdanIntent.putExtra("id", dingdan.getId());
+				intentJump(dingdanIntent, DingDanQueRenActivity.class, -2);
+					
 				break;
 			default:
+				Toast.makeText(mContext, "验证码错误，请重新输入", Toast.LENGTH_LONG).show();
 				break;
 			}
 		};

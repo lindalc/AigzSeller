@@ -112,6 +112,7 @@ public class AttentionActivity extends BaseActivity {
 			switch(msg.what){
 			case DataConstants.MAINACTIVITY_ATTENTION:
 				RequestDailog.closeDialog();
+				listAttention.clear();
 				ArrayList<AttentionUser> list = (ArrayList<AttentionUser>) msg.obj;
 				
 				listAttention.addAll(list);

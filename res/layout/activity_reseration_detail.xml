@@ -1,8 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:orientation="vertical"
 	android:background="#EEEEEE"
     tools:context=".ReserationDetailActivity" >
 
@@ -12,8 +11,10 @@
         layout="@layout/title_layout" />
     
     <LinearLayout 
+        android:id="@+id/activity_reserationdetail_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout"
         android:orientation="vertical"
         android:padding="20dp">
         <LinearLayout 
@@ -122,6 +123,7 @@
     <LinearLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
+	    android:layout_below="@id/activity_reserationdetail_linearlayout"
 	    android:orientation="vertical"
 	    >
         <LinearLayout 
@@ -133,9 +135,9 @@
             android:paddingLeft="10dp"
            >
             <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/title_back"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/xingming"/>
             <TextView 
                 android:id="@+id/activity_reserationdetail_username" 
                 android:layout_width="wrap_content"
@@ -157,9 +159,9 @@
             android:paddingLeft="10dp"
            >
         	<ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/title_back"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/dianhua"/>
             <TextView 
                 android:id="@+id/activity_reserationdetail_mobile" 
                 android:layout_width="wrap_content"
@@ -181,9 +183,9 @@
             android:paddingLeft="10dp"
            >
              <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/title_back"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/tishi"/>
             <TextView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -193,9 +195,7 @@
                 android:text="@string/reserationdetail_detail"/>
     	</LinearLayout>
     </LinearLayout>
-    <View 
-        android:layout_width="match_parent"
-        android:layout_height="90dp"/>
+   
     <LinearLayout
         android:id="@+id/activity_reseration_detail_layout" 
         android:layout_width="match_parent"
@@ -204,9 +204,11 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingBottom="5dp"
+        android:layout_alignParentBottom="true"
         android:visibility="gone"
         >
         <ImageView 
+            android:id="@+id/activity_reserationdetail_agree"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -216,10 +218,11 @@
             android:layout_height="match_parent"
             android:background="#EEEEEE"/>
         <ImageView 
+            android:id="@+id/activity_reserationdetail_refuse"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/reseration_cancel"/>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

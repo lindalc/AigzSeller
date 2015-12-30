@@ -11,17 +11,17 @@
         layout="@layout/title_layout" />
     <!-- 上部头像等信息区域 -->
     <RelativeLayout 
-            android:id="@+id/main_headportrait"
+            android:id="@+id/main_headportrait1"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:background="@drawable/main_bg_headportrait"
         	android:paddingLeft="30dp"
         	android:paddingRight="10dp"
         >
-        <ImageView 
+        <com.zykj.aiguanzhu.custome.CustomImageView
             android:id="@+id/con_user_detail_headporait"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:src="@drawable/main_icon_headportrait"/>
     	<TextView 

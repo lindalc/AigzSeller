@@ -157,8 +157,9 @@ public class BaseActivity extends Activity implements OnClickListener {
 		}
 
 		if (right_src_id != 0) {
+			mRightTextBtn.setVisibility(View.VISIBLE);
 			mRightTextBtn.setText(right_src_id);
-			mRightBtn.setVisibility(View.VISIBLE);
+			mRightTextBtn.setTextColor(Color.BLACK);
 		}
 
 		if (title_id != 0) {

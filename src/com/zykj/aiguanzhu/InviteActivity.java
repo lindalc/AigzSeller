@@ -4,28 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.android.volley.Request;
-import com.zykj.aiguanzhu.adapters.ReserationAdapter;
-import com.zykj.aiguanzhu.eneity.ReserationUser;
-import com.zykj.aiguanzhu.parser.DataConstants;
-import com.zykj.aiguanzhu.parser.DataParser;
-import com.zykj.aiguanzhu.utils.HttpUtils;
-import com.zykj.aiguanzhu.utils.JsonUtils;
-import com.zykj.aiguanzhu.utils.RequestDailog;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import com.zykj.aiguanzhu.adapters.ReserationAdapter;
+import com.zykj.aiguanzhu.eneity.ReserationUser;
+import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.utils.JsonUtils;
+import com.zykj.aiguanzhu.utils.RequestDailog;
 
 /**
  * @author lc
@@ -53,6 +47,10 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 	private ReserationAdapter adapterReseration;
 	private ArrayList<ReserationUser> listReseration;
 	
+	private String ShareContent ;
+	private String ShareTitle;
+	private String ShareUrl ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +58,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		rLayout = (RelativeLayout) findViewById(R.id.title_layout);
 		rLayout.setBackgroundResource(R.drawable.title_orange);
 		
+		initShare();//初始化分享模块
 		initInviteData();
 	}
 
@@ -79,7 +78,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		adapterReseration = new ReserationAdapter(mContext,listReseration);
 		listview.setAdapter(adapterReseration);
 		
-		RequestDailog.showDialog(this, "请稍后");
+//		RequestDailog.showDialog(this, "请稍后");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("merchantid", "1");
 		String json = JsonUtils.toJson(map);
@@ -99,6 +98,12 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		};
 	};
 	
+	private void initShare() {
+		ShareContent = "我的爱关注邀请码是:"+getSharedPreferenceValue("invitecode")+"，一起来爱关注吧，http://www.pgyer.com/ov1S";
+		ShareTitle = "我的邀请码："+getSharedPreferenceValue("invitecode");
+		ShareUrl = "http://www.pgyer.com/ov1S";
+	}
+	
 	 /*
 		 * 按钮点击事件
 		 * (non-Javadoc)
@@ -113,6 +118,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 				break;
 			case R.id.right_btn:
 				// TODO 邀请
+//				Share.invit(this, ShareContent, ShareTitle, ShareUrl);
 				break;
 			default:
 				break;

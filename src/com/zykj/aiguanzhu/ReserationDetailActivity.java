@@ -7,8 +7,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.zykj.aiguanzhu.eneity.ReserationDetail;
@@ -30,9 +32,12 @@ public class ReserationDetailActivity extends BaseActivity {
 	private int reserationid;
 	
 	private TextView txt_username,txt_otherinfo,txt_action,txt_datetime,txt_personnumber,txt_mobile;
+	private ImageView img_agree,img_refuse;
 	
 	private LinearLayout layout;
 	private int rstate;
+	private ReserationDetail reserationDetail;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,12 @@ public class ReserationDetailActivity extends BaseActivity {
 		
 		if(rstate == 0){
 			layout.setVisibility(View.VISIBLE);
+			
+			img_agree = (ImageView) findViewById(R.id.activity_reserationdetail_agree);
+			img_refuse = (ImageView) findViewById(R.id.activity_reserationdetail_refuse);
+			
+			img_agree.setOnClickListener(this);
+			img_refuse.setOnClickListener(this);
 		}
 		
 		RequestDailog.showDialog(this, "ÕýÔÚµÇÂ½ÇëÉÔºó");
@@ -74,7 +85,7 @@ public class ReserationDetailActivity extends BaseActivity {
 			switch (msg.what) {
 			case DataConstants.MAINACTIVITY_RESERATIONDETAIL:
 				RequestDailog.closeDialog();
-				ReserationDetail reserationDetail = (ReserationDetail) msg.obj;
+				reserationDetail = (ReserationDetail) msg.obj;
 				
 				txt_username.setText(reserationDetail.getUsername());
 				txt_otherinfo.setText(reserationDetail.getOtherinfo());
@@ -83,6 +94,12 @@ public class ReserationDetailActivity extends BaseActivity {
 				txt_personnumber.setText(reserationDetail.getPersonNum());
 				txt_mobile.setText(reserationDetail.getMobile());
 				
+				break;
+			case DataConstants.RESERATION_DETAIL:
+				RequestDailog.closeDialog();
+				String errdesc = (String) msg.obj;
+				Toast.makeText(mContext, errdesc, Toast.LENGTH_LONG).show();
+				layout.setVisibility(View.GONE);
 				break;
 			default:
 				break;
@@ -101,6 +118,20 @@ public class ReserationDetailActivity extends BaseActivity {
 		switch (v.getId()) {
 		case R.id.left_btn:
 			this.finish();
+			break;
+		case R.id.activity_reserationdetail_agree:
+			Map<String, String> mapagree = new HashMap<String, String>();
+			mapagree.put("reserationid", reserationDetail.getReserationid()+"");
+			mapagree.put("rstate", "1");
+			String jsonagree = JsonUtils.toJson(mapagree);
+			DataParser.getReserationUpdate(mContext, Request.Method.GET, HttpUtils.url_reserationUpdatel(jsonagree), null, handler);
+			break;
+		case R.id.activity_reserationdetail_refuse:
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("reserationid",reserationDetail.getReserationid()+"");
+			map.put("rstate", "2");
+			String json = JsonUtils.toJson(map);
+			DataParser.getReserationUpdate(mContext, Request.Method.GET, HttpUtils.url_reserationUpdatel(json), null, handler);
 			break;
 		default:
 			break;

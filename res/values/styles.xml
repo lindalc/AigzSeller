@@ -78,5 +78,34 @@
         <!-- 无标题显示 -->
         <item name="android:windowNoTitle">true</item>
     </style>
+    
+    <style name="Theme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <!-- TabHost标签按钮样式 -->
+    <style name="tab_button_bottom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">marquee</item>
+        <!-- 内部组件的排列 -->
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">#fff</item>
+        <item name="android:layout_marginTop">0.0dip</item>
+        <!-- 设置RadioButton的原来图片为空 -->
+        <item name="android:button">@null</item>
+        <!-- 顶部的空隙 -->
+        <item name="android:paddingTop">0dp</item>
+
+        <!-- 底部的空隙 -->
+        <item name="android:paddingBottom">0.0dip</item>
+        <item name="android:drawablePadding">1.0dip</item>
+        <!-- 与其他组件宽度占相同比重 -->
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:singleLine">false</item>
+    </style>
+
+    
 
 </resources>

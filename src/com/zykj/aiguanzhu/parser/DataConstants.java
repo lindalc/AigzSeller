@@ -73,8 +73,17 @@ public class DataConstants {
 	 * 预约详情
 	 */
 	public static final int MAINACTIVITY_RESERATIONDETAIL = 0x0001009;
-	
+	/**
+	 * 卡券核销 
+	 */
+	public static final int MAINACTIVITY_CARTCHECK = 0x0001010;
 //////////////////////////////////商户版主页 END ////////////////////////////////
+//////////////////////////////////积分 START ///////////////////////////////
+	/**
+	 * 积分变化
+	 */
+	public static final int MAINACIVITY_INTEGRALLIST = 0x0003001;
+//////////////////////////////////积分 END ////////////////////////////////
 //////////////////////////////////关注用户 START ///////////////////////////////
 	/**
 	 * 关注用户解析数据标识
@@ -94,6 +103,18 @@ public class DataConstants {
 	 * 取消预约
 	 */
 	public static final int RESERATION_CANCEL = 0x0008003;
+	
+	
+	/**
+	 * 预约详情
+	 */
+	public static final int RESERATION_DETAIL = 0x0009001;
 //////////////////////////////////预约 END ///////////////////////////////
 	
+//////////////////////////////////订单 START ///////////////////////////////
+	/**
+	 * 确认订单
+	 */
+	public static final int DINGDAN_CONFIRM = 0x0010001;
+//////////////////////////////////订单 END ///////////////////////////////
 }

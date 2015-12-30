@@ -18,6 +18,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.squareup.picasso.Picasso;
+import com.zykj.aiguanzhu.custome.CustomImageView;
 import com.zykj.aiguanzhu.eneity.AttentionUserDetail;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
@@ -39,7 +40,7 @@ public class ConUserDetailActivity extends BaseActivity {
 	private Intent intent;
 	private String name;
 	
-	 private ImageView img_head;
+	 private CustomImageView img_head;
 	 private TextView txt_name,txt_nickname,txt_sex,txt_birth,txt_address;
 	 
 	
@@ -58,7 +59,7 @@ public class ConUserDetailActivity extends BaseActivity {
 		setTitleContent(R.drawable.title_back, 0, R.string.attention_detail_title);
 		mLeftBtn.setOnClickListener(this);
 		
-		img_head = (ImageView) findViewById(R.id.con_user_detail_headporait);
+		img_head = (CustomImageView) findViewById(R.id.con_user_detail_headporait);
 		txt_name = (TextView)findViewById(R.id.con_user_detail_name);
 		txt_nickname = (TextView) findViewById(R.id.con_user_detail_nickname);
 		txt_sex = (TextView) findViewById(R.id.con_user_detail_sex);

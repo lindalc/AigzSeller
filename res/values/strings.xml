@@ -17,7 +17,7 @@
     <string name="couponcount">销量券:0.00</string>
     <string name="recharge">充值</string>
     <string name="psd">积分</string>
-    <string name="quit">退出</string>
+    <string name="quit">退出登陆</string>
     
 
     <!-- 充值 -->
@@ -27,6 +27,22 @@
     <string name="recharge_count_edittext">请输入要充值多少金额</string>
     <string name="str_alipay_psyment">支付宝</string>
     <string name="str_wechat_payment">微信</string>
+    <string name="recharge_commit">确定</string>
+    <string name="appName">demoapp</string>
+    <string name="ok">完成</string>
+    <string name="wechat">微信</string>
+    <string name="alipay">支付宝</string>
+    <string name="upmp">银联</string>
+    <string name="bfb">百度钱包</string>
+    <string name="jdpay">京东支付</string>
+    <string name="confirm">确认</string>
+    <string name="yuan">元</string>
+    <string name="donateFailMessage">\u3000\u3000感谢你的爱心，\n但是系统出现了一些错误</string>
+    <string name="validationErrors">错误</string>
+    <string name="notInstalled">未安装支付软件</string>
+    <string name="amount">支付金额</string>
+    <string name="missingImage">图片加载失败</string>
+    
 
     <!-- 积分 -->
     <string name="mypsd">我的积分</string>
@@ -95,6 +111,7 @@
 
     <!-- 卡券核销 -->
     <string name="cartcheck">卡券核销</string>
+    <string name="cartcheckHint">请输入相关信息</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
