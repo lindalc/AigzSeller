@@ -32,7 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author lc
  * @date 创建时间：2015-12-25 下午4:24:37
  * @version 1.0 
- * @Description 预约确定
+ * @Description 预约用户
  */
 public class ReserationActivity extends BaseActivity {
 
@@ -81,9 +81,11 @@ public class ReserationActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				curPosition = arg2;
-				rstate = listReseration.get(curPosition).getRstate();
+				rstate = listReseration.get(arg2).getRstate();
+				int reserationid = listReseration.get(arg2).getReseratid();
 				Intent intent = new Intent(mContext,ReserationDetailActivity.class);
 				intent.putExtra("rstate", rstate);
+				intent.putExtra("reserationid", reserationid);
 				startActivity(intent);
 			}
 		});
@@ -106,7 +108,7 @@ public class ReserationActivity extends BaseActivity {
 				ArrayList<ReserationUser> list = (ArrayList<ReserationUser>) msg.obj;
 				
 				for(int i=0;i<list.size();i++){
-					if(list.get(i).getRstate()==1){
+					if(list.get(i).getRstate()==1 || list.get(i).getRstate() == 3){
 						listReseration.add(list.get(i));
 					}
 				}

@@ -31,12 +31,13 @@ public class ReserationDetailActivity extends BaseActivity {
 	private Context mContext = ReserationDetailActivity.this;
 	private int reserationid;
 	
-	private TextView txt_username,txt_otherinfo,txt_action,txt_datetime,txt_personnumber,txt_mobile;
+	private TextView txt_username,txt_otherinfo,txt_action,txt_datetime,txt_personnumber,txt_mobile,txt_miaoshu;
 	private ImageView img_agree,img_refuse;
 	
 	private LinearLayout layout;
 	private int rstate;
 	private ReserationDetail reserationDetail;
+	
 	
 	
 	@Override
@@ -62,8 +63,10 @@ public class ReserationDetailActivity extends BaseActivity {
 		txt_personnumber = (TextView) findViewById(R.id.activity_reserationdetail_personnumber);
 		txt_mobile = (TextView) findViewById(R.id.activity_reserationdetail_mobile);
 		layout = (LinearLayout) findViewById(R.id.activity_reseration_detail_layout);
+		txt_miaoshu = (TextView)findViewById(R.id.activity_reseration_detail_miaoshu);
 		
-		if(rstate == 0){
+		switch(rstate){
+		case 0:
 			layout.setVisibility(View.VISIBLE);
 			
 			img_agree = (ImageView) findViewById(R.id.activity_reserationdetail_agree);
@@ -71,11 +74,23 @@ public class ReserationDetailActivity extends BaseActivity {
 			
 			img_agree.setOnClickListener(this);
 			img_refuse.setOnClickListener(this);
+			break;
+		case 1:
+			txt_miaoshu.setText("已经确定此预约");
+			break;
+		case 2:
+			txt_miaoshu.setText("预约已取消");
+			break;
+		case 3:
+			txt_miaoshu.setText("预约完成");
+			break;
+		default :
+			break;
 		}
 		
-		RequestDailog.showDialog(this, "正在登陆请稍后");
+		RequestDailog.showDialog(this, "请稍后");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("reserationid", "1");
+		map.put("reserationid",reserationid+"");
 		String json = JsonUtils.toJson(map);
 		DataParser.getReserationDetail(mContext, Request.Method.GET, HttpUtils.url_reserationDetail(json), null, handler);
 	}
@@ -91,7 +106,7 @@ public class ReserationDetailActivity extends BaseActivity {
 				txt_otherinfo.setText(reserationDetail.getOtherinfo());
 				txt_action.setText(reserationDetail.getGoodname());
 				txt_datetime.setText(reserationDetail.getDatetime());
-				txt_personnumber.setText(reserationDetail.getPersonNum());
+				txt_personnumber.setText(reserationDetail.getPersonNum()+"");
 				txt_mobile.setText(reserationDetail.getMobile());
 				
 				break;

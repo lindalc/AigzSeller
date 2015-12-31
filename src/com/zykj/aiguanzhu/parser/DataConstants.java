@@ -53,6 +53,7 @@ public class DataConstants {
 	 * 验证码
 	 */
 	public static final int MAINACTIVITY_CODE = 0x0001004;
+	public static final int MAINACTIVITY_CODE_FAULT = 0x00010041;
 	/**
 	 * 关注用户
 	 */
@@ -83,6 +84,10 @@ public class DataConstants {
 	 * 积分变化
 	 */
 	public static final int MAINACIVITY_INTEGRALLIST = 0x0003001;
+	/**
+	 * 积分充值
+	 */
+	public static final int MAINACTIVITY_INTEGRALRECHARGE = 0x0003002;
 //////////////////////////////////积分 END ////////////////////////////////
 //////////////////////////////////关注用户 START ///////////////////////////////
 	/**

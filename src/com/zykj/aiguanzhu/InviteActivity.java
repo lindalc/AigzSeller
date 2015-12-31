@@ -16,10 +16,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.zykj.aiguanzhu.adapters.ReserationAdapter;
+import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.RequestDailog;
+import com.zykj.aiguanzhu.utils.Share;
 
 /**
  * @author lc
@@ -118,7 +120,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 				break;
 			case R.id.right_btn:
 				// TODO ÑûÇë
-//				Share.invit(this, ShareContent, ShareTitle, ShareUrl);
+				Share.invit(this, ShareContent, ShareTitle, ShareUrl);
 				break;
 			default:
 				break;

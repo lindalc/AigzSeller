@@ -21,26 +21,15 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/shape_background2"
-        android:padding="10dp" >
+         >
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/shousuohui" />
-
-        <EditText
-            android:id="@+id/a1_sydpss"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="65dp"
-            android:background="@null"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:imeOptions="actionSearch"
-            android:hint="@string/cartcheckHint" />
+        <SearchView
+	        android:id="@+id/srv1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:iconifiedByDefault="false"
+	        android:inputType="textFilter"
+	        android:queryHint="请输入您要查找的内容"/>
     </RelativeLayout>
     
     <ListView 

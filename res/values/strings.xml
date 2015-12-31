@@ -82,6 +82,9 @@
     <string name="commit_wait">等待确定</string>
     <string name="commit_already">已经确定</string>
     <string name="title_activity_reseration_detail">ReserationDetailActivity</string>
+    
+    <!--  预约确定 -->
+    <string name="reserationcommit">预约确定</string>
 
     <!-- 预约详情 -->
     <string name="reserationdetail">预约详情</string>
@@ -99,6 +102,7 @@
     <string name="invite_agree">同意邀请</string>
     <string name="invite_wait">等待确定</string>
     <string name="invite_number">200人</string>
+    <string name="registertime">注册时间2015-8-30</string>
     <string name="title_activity_reseration">ReserationActivity</string>
     <string name="title_activity_my_psd">MyPsdActivity</string>
     <string name="title_activity_reseration_commit">ReserationCommitActivity</string>

@@ -92,6 +92,10 @@ public class ReserationAdapter extends BaseAdapter {
 			holder.txt_right.setText("等待确定");
 		}else if(reserationUser.getRstate() == 1){
 			holder.txt_right.setText("已经确定");
+		}else if(reserationUser.getRstate() == 2){
+			holder.txt_right.setText("预约取消");
+		}else if(reserationUser.getRstate() == 3){
+			holder.txt_right.setText("预约完成");
 		}
 		Picasso.with(mContext).load(HttpUtils.img_url+reserationUser.getHeadportain()).placeholder(R.drawable.main_icon_headportrait).resize(70, 70).into(holder.img_head);
 		

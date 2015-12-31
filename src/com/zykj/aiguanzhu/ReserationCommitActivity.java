@@ -13,6 +13,7 @@ import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.RequestDailog;
+import com.zykj.aiguanzhu.utils.ToolsUtil;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,13 +27,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * @author lc
  * @date 创建时间：2015-12-25 下午4:24:26
  * @version 1.0 
- * @Description 预约用户
+ * @Description 预约确定
  */
 public class ReserationCommitActivity extends BaseActivity {
 
@@ -59,6 +61,13 @@ public class ReserationCommitActivity extends BaseActivity {
 		rLayout = (RelativeLayout) findViewById(R.id.title_layout);
 		rLayout.setBackgroundResource(R.drawable.title_orange);
 		
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		initReserationCommitData();
 	}
 
@@ -66,7 +75,7 @@ public class ReserationCommitActivity extends BaseActivity {
 	 *  预约确定
 	 */
 	public void initReserationCommitData(){
-		setTitleContent(R.drawable.title_orange_back, R.string.reserationusers);
+		setTitleContent(R.drawable.title_orange_back, R.string.reserationcommit);
 		mLeftBtn.setOnClickListener(this);
 		
 		listView = (ListView) findViewById(R.id.activity_concemuser_listview);
@@ -89,7 +98,8 @@ public class ReserationCommitActivity extends BaseActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				rstate = listReseration.get(curPosition).getRstate();
+				final int cur = arg2;
+				rstate = listReseration.get(arg2).getRstate();
 				if(rstate == 2){
 					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
 			        builder.setTitle("温馨提醒!");
@@ -99,12 +109,12 @@ public class ReserationCommitActivity extends BaseActivity {
 			                dialog.dismiss();  
 			                //设置你的操作事项  
 			                Map<String, String> map = new HashMap<String, String>();
-			        		map.put("reserationid", "1");
-			        		String json = JsonUtils.toJson(map);
-			        		DataParser.getReserationDelete(mContext, Request.Method.GET, HttpUtils.url_reserationDelete(json), null, handler);
+			        		map.put("reserationid", listReseration.get(curPosition).getReseratid()+"");
+			        		String json1 = JsonUtils.toJson(map);
+			        		DataParser.getReserationDelete(mContext, Request.Method.GET, HttpUtils.url_reserationDelete(json1), null, handler);
 			        		
-			        		//TODO 删除
-			                adapterReseration.notifyDataSetChanged();
+			        		listReseration.remove(cur);
+			        		adapterReseration.notifyDataSetChanged();
 			            }  
 			        });  
 			  
@@ -117,7 +127,7 @@ public class ReserationCommitActivity extends BaseActivity {
 			  
 			        builder.create().show();  
 				}
-				return false;
+				return true;
 			}
 		});
 		
@@ -129,18 +139,19 @@ public class ReserationCommitActivity extends BaseActivity {
 				rstate = listReseration.get(curPosition).getRstate();
 				Intent intent = new Intent(mContext,ReserationDetailActivity.class);
 				intent.putExtra("rstate", rstate);
-			    intent.putExtra("reserationid", listReseration.get(curPosition).getReseratid());
+				ToolsUtil.print("----", "rstate = "+rstate);
+			    intent.putExtra("reserationid", listReseration.get(arg2).getReseratid());
 				startActivity(intent);
 			}
 		});
 	}
-	
 	private Handler handler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){
 			case DataConstants.MAINACTIVITY_RESERATIONUSER:
 				RequestDailog.closeDialog();
-				ArrayList<ReserationUser> list = (ArrayList<ReserationUser>) msg.obj;
+				listReseration.clear();
+				ArrayList<ReserationUser>  list = (ArrayList<ReserationUser>) msg.obj;
 				
 				listReseration.addAll(list);
 				adapterReseration.notifyDataSetChanged();
@@ -148,6 +159,11 @@ public class ReserationCommitActivity extends BaseActivity {
 				break;
 			case DataConstants.RESERATION_DELETE:
 				// TODO 删除预约
+				String errdesc = (String) msg.obj;
+				Toast.makeText(mContext, errdesc, Toast.LENGTH_SHORT).show();
+				
+				//TODO 删除
+//				DataParser.getReserationUser(mContext, Request.Method.GET, HttpUtils.url_reserationUser(json), null, handler);
 				break;
 			default:break;
 			}

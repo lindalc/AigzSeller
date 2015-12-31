@@ -371,6 +371,7 @@ public class DataParser {
 			try {
 				status = response.getJSONObject("status");
 				String succeed = status.getString("succeed");
+				String errdesc = status.getString("errdesc");
 				if (succeed.equals("1")) //³É¹¦
 				{
 					JSONObject data = response.getJSONObject("data");
@@ -382,6 +383,11 @@ public class DataParser {
 					Message msg = new Message();
 					msg.what = DataConstants.MAINACTIVITY_CODE;
 					msg.obj = dingdan;
+					handler.sendMessage(msg);
+				}else if(succeed.equals("0")){
+					Message msg = new Message();
+					msg.what = DataConstants.MAINACTIVITY_CODE_FAULT;
+					msg.obj = errdesc;
 					handler.sendMessage(msg);
 				}
 				

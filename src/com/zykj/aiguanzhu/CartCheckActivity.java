@@ -12,12 +12,17 @@ import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.RequestDailog;
+import com.zykj.aiguanzhu.utils.ToolsUtil;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 /**
  * 
@@ -37,6 +42,9 @@ public class CartCheckActivity extends BaseActivity {
 	private ListView listview;
 	private ArrayList<CartCheck> list;
 	private CartCheckAdapter adapter;
+	private CartCheckAdapter aadapter;
+	
+	private SearchView srv1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +58,33 @@ public class CartCheckActivity extends BaseActivity {
 		setTitleContent(R.drawable.title_orange_back, R.string.cartcheck);
 		mLeftBtn.setOnClickListener(this);
 		
+		srv1 = (SearchView) findViewById(R.id.srv1);
+		
 		listview = (ListView) findViewById(R.id.activity_cart_check_lisview);
 		list = new ArrayList<CartCheck>();
 		
 		adapter = new CartCheckAdapter(mContext, list);
 		listview.setAdapter(adapter);
 		
+		srv1.setOnQueryTextListener(new OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				if (newText.length() != 0) {
+					setFilterText(newText);
+				} else {
+					clearTextFilter();
+				}
+				return false;
+			}
+		});
 		
 		RequestDailog.showDialog(this, "请稍后");
 		Map<String, String> map = new HashMap<String, String>();
@@ -84,6 +113,24 @@ public class CartCheckActivity extends BaseActivity {
 			}
 		};
 	};
+	
+	private ArrayList<CartCheck> newList = new ArrayList<CartCheck>();
+	
+	public void setFilterText(String filterText) {
+		newList.clear();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getCouponname().contains(filterText)) {
+				newList.add(list.get(i));
+			}
+		}
+		
+		aadapter = new CartCheckAdapter(mContext,newList);
+		listview.setAdapter(aadapter);
+	}
+
+	public void clearTextFilter() {
+		listview.setAdapter(adapter);
+	}
 	
 	/*
 	 * 按钮点击事件

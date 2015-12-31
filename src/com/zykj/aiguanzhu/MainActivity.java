@@ -314,10 +314,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			case DataConstants.MAINACTIVITY_CODE:
 				Dingdan dingdan = (Dingdan) msg.obj;
 				
+				ToolsUtil.print("----", "123123");
 				Intent dingdanIntent = new Intent();
 				dingdanIntent.putExtra("id", dingdan.getId());
 				intentJump(dingdanIntent, DingDanQueRenActivity.class, -2);
-					
+				
+				break;
+			case DataConstants.MAINACTIVITY_CODE_FAULT:
+				String errdesc = (String) msg.obj;
+				Toast.makeText(mContext, errdesc, Toast.LENGTH_LONG).show();
 				break;
 			default:
 				Toast.makeText(mContext, "验证码错误，请重新输入", Toast.LENGTH_LONG).show();
