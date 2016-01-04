@@ -45,6 +45,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 	
 	private Timer timer;
 	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

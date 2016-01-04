@@ -124,16 +124,7 @@ public class ConcernuserListViewAdapter extends BaseAdapter {
 //		bitmap = null;
 		
 		
-		holder.img_rightarrow.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(mContext,ConUserDetailActivity.class);
-				intent.putExtra("id", aUser.getUserid());
-				intent.putExtra("name", aUser.getName());
-				mContext.startActivity(intent);
-			}
-		});
+		
 		
 		
 		

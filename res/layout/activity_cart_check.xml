@@ -32,7 +32,7 @@
 	        android:queryHint="请输入您要查找的内容"/>
     </RelativeLayout>
     
-    <ListView 
+    <ListView
         android:id="@+id/activity_cart_check_lisview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

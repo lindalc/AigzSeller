@@ -34,7 +34,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 	private Context mContext = InviteActivity.this;
 	private int curPosition;
 	private int rstate;
-	
+	String merchantid;
 	/**
 	 * 标题栏
 	 */
@@ -59,7 +59,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		setContentView(R.layout.activity_invite);
 		rLayout = (RelativeLayout) findViewById(R.id.title_layout);
 		rLayout.setBackgroundResource(R.drawable.title_orange);
-		
+		merchantid = getSharedPreferenceValue("merchantid");
 		initShare();//初始化分享模块
 		initInviteData();
 	}
@@ -82,7 +82,7 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		
 //		RequestDailog.showDialog(this, "请稍后");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("merchantid", "1");
+		map.put("merchantid", merchantid);
 		String json = JsonUtils.toJson(map);
 		//TODO 解析数据，接收handler 
 //		DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);

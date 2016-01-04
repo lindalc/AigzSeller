@@ -15,5 +15,10 @@
     <dimen name="setting_text_size">16sp</dimen>
 	<dimen name="btn_height">40dp</dimen>
     <dimen name="btn_width">50dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
     
 </resources>

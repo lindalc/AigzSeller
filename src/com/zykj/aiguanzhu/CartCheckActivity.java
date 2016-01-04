@@ -1,12 +1,20 @@
 package com.zykj.aiguanzhu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.android.volley.Request;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.zykj.aiguanzhu.MyIntegralActivity.RefredshDataRunnable;
 import com.zykj.aiguanzhu.adapters.CartCheckAdapter;
 import com.zykj.aiguanzhu.eneity.CartCheck;
+import com.zykj.aiguanzhu.eneity.MyIntegral;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
@@ -17,6 +25,7 @@ import com.zykj.aiguanzhu.utils.ToolsUtil;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -34,7 +43,7 @@ import android.widget.SearchView.OnQueryTextListener;
 public class CartCheckActivity extends BaseActivity {
 
 	private Context mContext = CartCheckActivity.this;
-
+	String merchantid;
 	
 	/**
 	 * 卡券核销listview
@@ -44,13 +53,18 @@ public class CartCheckActivity extends BaseActivity {
 	private CartCheckAdapter adapter;
 	private CartCheckAdapter aadapter;
 	
+	/**
+	 * 搜索框
+	 */
 	private SearchView srv1;
+	
+	private int i = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cart_check);
-		
+		merchantid = getSharedPreferenceValue("merchantid");
 		initCartCheckData();
 	}
 	
@@ -65,6 +79,9 @@ public class CartCheckActivity extends BaseActivity {
 		
 		adapter = new CartCheckAdapter(mContext, list);
 		listview.setAdapter(adapter);
+		
+//		initPTR2();//初始化下拉刷新,上拉加载组件
+//		setPullDownLayout();//设置下拉布局的相关信息
 		
 		srv1.setOnQueryTextListener(new OnQueryTextListener() {
 
@@ -88,20 +105,76 @@ public class CartCheckActivity extends BaseActivity {
 		
 		RequestDailog.showDialog(this, "请稍后");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("merchantid", "1");
+		map.put("merchantid", merchantid);
 		map.put("pagenumber", "1");
 		map.put("pagesize", "20");
 		String json = JsonUtils.toJson(map);
 		DataParser.getCartCheck(mContext, Request.Method.GET, HttpUtils.url_cartcheck(json), null, handler);
 	}
 	
+//	private void setPullDownLayout() {
+//		// TODO Auto-generated method stub
+//		//获取下拉布局
+//		ILoadingLayout proxy = listview.getLoadingLayoutProxy(true,false);
+//		proxy.setPullLabel("下拉刷新");
+//		proxy.setReleaseLabel("放开以加载...");
+//		proxy.setRefreshingLabel("玩命加载中....");
+//		proxy.setLastUpdatedLabel("最后的更新时间:"+DateFormat.getDateFormat(getApplicationContext()).format(new Date()));
+//		proxy.setLoadingDrawable(getResources().getDrawable(R.drawable.default_ptr_rotate));
+//	}
+//
+//	private void initPTR2() {
+//		// TODO Auto-generated method stub
+//		listview.setMode(Mode.BOTH);
+//		listview.setOnRefreshListener(new OnRefreshListener2() {
+//
+//			@Override
+//			public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+//				// TODO下拉事件
+//				new Thread(){
+//					public void run() {
+//						try {
+//							Thread.sleep(3000);
+//							
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						
+//						mHandler.post(new RefredshDataRunnable(cart,false));
+//					};
+//				}.start();
+//			}
+//
+//			@Override
+//			public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+//				// TODO 上拉事件
+//				new Thread(){
+//					public void run() {
+//						try {
+//							Thread.sleep(3000);
+//							
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						mHandler.post(new RefredshDataRunnable(cart,true));
+//						
+//					};
+//				}.start();
+//			}
+//		});
+//	}
+//	
+//	private Handler mHandler = new Handler();
+	private ArrayList<CartCheck> cart;
+	
 	private Handler handler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case DataConstants.MAINACTIVITY_CARTCHECK:
-				list.clear();
 				RequestDailog.closeDialog();
-				ArrayList<CartCheck> cart = (ArrayList<CartCheck>) msg.obj;
+				cart = (ArrayList<CartCheck>) msg.obj;
 				
 				list.addAll(cart);
 				adapter.notifyDataSetChanged();
@@ -154,9 +227,52 @@ public class CartCheckActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onStop();
 		DataParser.cancel(mContext);
-		listview = null;
 		list = null;
 		System.gc();
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		listview = null;
+	}
+	
+//	//自定义Handler发送的Runnable实现类
+//	class RefredshDataRunnable implements Runnable{
+//		
+//		private boolean isLoadMore;
+//		public RefredshDataRunnable(ArrayList<CartCheck> list,boolean isLoadMore){
+//			this.isLoadMore = isLoadMore;
+//		}
+//		
+//		@Override
+//		public void run() {
+//			// TODO 在UI线程中执行的方法：刷新数据
+//			RequestDailog.showDialog(mContext, "请稍后");
+//			if(!isLoadMore){
+//				list.clear();
+//				
+//				Map<String, String> map = new HashMap<String, String>();
+//				map.put("merchantid", merchantid);
+//				map.put("pagenumber", "1");
+//				map.put("pagesize", "20");
+//				String json = JsonUtils.toJson(map);
+//				DataParser.getCartCheck(mContext, Request.Method.GET, HttpUtils.url_cartcheck(json), null, handler);
+//			}else{
+//				Map<String, String> map = new HashMap<String, String>();
+//				map.put("merchantid", merchantid);
+//				map.put("pagenumber", (++i)+"");
+//				map.put("pagesize", "20");
+//				String json = JsonUtils.toJson(map);
+//				DataParser.getCartCheck(mContext, Request.Method.GET, HttpUtils.url_cartcheck(json), null, handler);
+//			}
+//			
+//			ToolsUtil.print("----", ""+list.size());
+//			
+//			//通知下拉刷新控件，数据已加载完成
+//			listview.onRefreshComplete();
+//		}
+//	}
 
 }

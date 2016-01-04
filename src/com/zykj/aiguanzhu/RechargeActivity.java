@@ -41,7 +41,7 @@ import android.widget.Toast;
 public class RechargeActivity extends BaseActivity {
 
 	private Context mContext = RechargeActivity.this;
-	
+	String merchantid;
 	/**
 	 * EditText 积分和金额
 	 */
@@ -64,7 +64,7 @@ public class RechargeActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recharge);
-		
+		merchantid = getSharedPreferenceValue("merchantid");
 		initRechargeData();
 	}
 	
@@ -108,7 +108,7 @@ public class RechargeActivity extends BaseActivity {
 				if(str_count !=null || str_psd!=null){
 					RequestDailog.showDialog(mContext, "正在跳转");
 					Map<String, String> map = new HashMap<String, String>();
-					map.put("merchantid", "1");
+					map.put("merchantid", merchantid);
 					map.put("channel", "wx");
 					map.put("amount",str_count);
 					String json = JsonUtils.toJson(map);

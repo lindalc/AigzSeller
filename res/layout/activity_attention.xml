@@ -12,7 +12,7 @@
          />
     
     <!--  我的关注 -->
-    <ListView 
+    <com.handmark.pulltorefresh.library.PullToRefreshListView 
         android:id="@+id/activity_concemuser_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

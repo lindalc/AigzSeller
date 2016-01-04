@@ -18,6 +18,9 @@
     <string name="recharge">充值</string>
     <string name="psd">积分</string>
     <string name="quit">退出登陆</string>
+    <string name="listfooterview_normal">查看更多</string>
+    <string name="listfooterview_ready">松开载入更多</string>
+    <string name="title_activity_second">SecondActivity</string>
     
 
     <!-- 充值 -->
