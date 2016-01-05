@@ -26,6 +26,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.eneity.AttentionUserDetail;
 import com.zykj.aiguanzhu.eneity.CartCheck;
+import com.zykj.aiguanzhu.eneity.CartData;
 import com.zykj.aiguanzhu.eneity.Dingdan;
 import com.zykj.aiguanzhu.eneity.MyIntegral;
 import com.zykj.aiguanzhu.eneity.ReserationDetail;
@@ -487,6 +488,56 @@ public class DataParser {
 					handler.sendMessage(msg);
 				}
 				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		   
+	   }, new Response.ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			RequestDailog.closeDialog();
+            ToolsUtil.print("----","ErrorResponse="+error.getMessage());
+            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_LONG).show();
+		}
+	});
+	   mRequestQueue.add(jr);  
+   }
+   
+   /**
+    * 卡券数据
+    * @param mContext
+    * @param method
+    * @param url
+    * @param json
+    * @param handler
+    */
+   public static void getCartData(final Context mContext,int method,String url,JsonObject json,final Handler handler){
+	   ToolsUtil.print("----", "url:"+url);
+	   mRequestQueue =  Volley.newRequestQueue(mContext);  
+	   JsonObjectRequest jr = new JsonObjectRequest(method, url, null, new Response.Listener<JSONObject>() {
+		@Override
+		public void onResponse(JSONObject response) {
+			
+			JSONObject status;
+			try {
+				status = response.getJSONObject("status");
+				String succeed = status.getString("succeed");
+				if (succeed.equals("1")) //成功
+				{
+					JSONArray data = response.getJSONArray("data");
+					
+					ArrayList<CartData> aUser = new ArrayList<CartData>();
+					
+					aUser = new Gson().fromJson(data.toString(), new TypeToken<ArrayList<CartData>>(){}.getType());
+					
+					Message msg = new Message();
+					msg.what = DataConstants.MAINACTIVITY_CARTDATA;
+					msg.obj = aUser;
+					handler.sendMessage(msg);
+				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

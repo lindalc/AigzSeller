@@ -89,9 +89,9 @@ public class ReserationAdapter extends BaseAdapter {
 		holder.txt_date.setText("预约时间:"+reserationUser.getDatetime());
 		holder.txt_date.setTextColor(Color.GRAY);
 		if(reserationUser.getRstate() == 0){
-			holder.txt_right.setText("等待确定");
+			holder.txt_right.setText("预约申请");
 		}else if(reserationUser.getRstate() == 1){
-			holder.txt_right.setText("已经确定");
+			holder.txt_right.setText("预约同意");
 		}else if(reserationUser.getRstate() == 2){
 			holder.txt_right.setText("预约取消");
 		}else if(reserationUser.getRstate() == 3){

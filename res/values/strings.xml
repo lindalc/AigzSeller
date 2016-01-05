@@ -53,6 +53,7 @@
     <string name="invitevalue">邀请返佣</string>
     <string name="spendvalue">消费返佣</string>
     <string name="depositvalue">提现</string>
+    <string name="integraldetail">积分明细</string>
     <string name="title_activity_invite">InviteActivity</string>
 
     <!-- 二维码 -->

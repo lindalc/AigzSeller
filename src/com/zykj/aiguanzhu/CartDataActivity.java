@@ -1,31 +1,24 @@
 package com.zykj.aiguanzhu;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.achartengine.model.CategorySeries;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.renderer.SimpleSeriesRenderer;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-
-import com.zykj.aiguanzhu.custome.BarChartView;
-import com.zykj.aiguanzhu.custome.HistogramView;
-
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager.LayoutParams;
-import android.view.KeyEvent;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.zykj.aiguanzhu.custome.HistogramView;
+import com.zykj.aiguanzhu.eneity.CartData;
+import com.zykj.aiguanzhu.parser.DataConstants;
+import com.zykj.aiguanzhu.parser.DataParser;
+import com.zykj.aiguanzhu.utils.HttpUtils;
+import com.zykj.aiguanzhu.utils.JsonUtils;
+import com.zykj.aiguanzhu.utils.RequestDailog;
 
 /**
  * @author  lc 
@@ -46,11 +39,18 @@ public class CartDataActivity extends BaseActivity implements OnClickListener {
 //	private List<String> optionsY = new ArrayList<String>();
 //	private boolean isSingleView=true;
 	private HistogramView view;
+	
+	private int[] num = null;
+	private String[] date = null; 
+	
+	private String merchantid;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cart_data);
+		
+		merchantid = getSharedPreferenceValue("merchantid");
 		
 		setTitleContent(R.drawable.title_orange_back, R.string.cartdata);
 		mLeftBtn.setOnClickListener(this);
@@ -62,11 +62,49 @@ public class CartDataActivity extends BaseActivity implements OnClickListener {
 //		}
 		layoutViewContent = (LinearLayout) findViewById(R.id.barview_content);
 		layoutViewContent.removeAllViews();
-		view = new HistogramView(mContext);
-//		view.initData(first, second, optionsX,optionsY, "");
-		layoutViewContent.addView(view);
-		layoutViewContent.setBackgroundColor(0xffffffff);
+		
+		initData();
+		
+		
 	}
+	
+	public void initData(){
+		RequestDailog.showDialog(this, "请稍后");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("merchantid", merchantid);
+		String json = JsonUtils.toJson(map);
+		DataParser.getCartData(mContext, Request.Method.GET, HttpUtils.url_cartdata(json), null, handler);
+	}
+	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch(msg.what){
+				case DataConstants.MAINACTIVITY_CARTDATA:
+					RequestDailog.closeDialog();
+					ArrayList<CartData> cart = (ArrayList<CartData>) msg.obj;
+					
+					
+					num = new int[cart.size()];
+					date = new String[cart.size()];
+					for(int i=0;i<num.length;i++){
+						num[i] = cart.get(i).getNum();
+						StringBuffer buffer = new StringBuffer();
+						buffer.append(cart.get(i).getDate().toString().substring(4,6)).append(".").append(cart.get(i).getDate().toString().substring(6));
+						date[i] = buffer.toString();
+						buffer = null;
+					}
+					
+					view = new HistogramView(mContext,num,date);
+//					view.initData(first, second, optionsX,optionsY, "");
+					layoutViewContent.addView(view);
+					layoutViewContent.setBackgroundColor(0xffffffff);
+					
+					break;
+				default :
+					break;
+			}
+		};
+	};
 
 	 /*
 	 * 按钮点击事件

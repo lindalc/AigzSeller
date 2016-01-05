@@ -75,9 +75,13 @@ public class DataConstants {
 	 */
 	public static final int MAINACTIVITY_RESERATIONDETAIL = 0x0001009;
 	/**
+	 * 卡券数据 
+	 */
+	public static final int MAINACTIVITY_CARTDATA = 0x0001012;
+	/**
 	 * 卡券核销 
 	 */
-	public static final int MAINACTIVITY_CARTCHECK = 0x0001010;
+	public static final int MAINACTIVITY_CARTCHECK = 0x0001011;
 //////////////////////////////////商户版主页 END ////////////////////////////////
 //////////////////////////////////积分 START ///////////////////////////////
 	/**
@@ -120,6 +124,6 @@ public class DataConstants {
 	/**
 	 * 确认订单
 	 */
-	public static final int DINGDAN_CONFIRM = 0x0010001;
+	public static final int DINGDAN_CONFIRM = 0x0012001;
 //////////////////////////////////订单 END ///////////////////////////////
 }

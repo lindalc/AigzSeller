@@ -192,7 +192,7 @@ public class CartCheckActivity extends BaseActivity {
 	public void setFilterText(String filterText) {
 		newList.clear();
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getCouponname().contains(filterText)) {
+			if (list.get(i).getCouponname().contains(filterText) || list.get(i).getMembername().contains(filterText)) {
 				newList.add(list.get(i));
 			}
 		}

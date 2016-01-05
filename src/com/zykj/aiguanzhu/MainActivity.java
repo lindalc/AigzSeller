@@ -118,12 +118,11 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
     public void initGrid(){
     	
     	if (isLoged()) {
-    		setTitleContent(R.drawable.title_back, R.string.quit,R.string.seller,1);
+    		setTitleContent(0, R.string.quit,R.string.seller,1);
     		mRightTextBtn.setOnClickListener(this);
     	}else{
     		setTitleContent(R.drawable.title_back, 0,R.string.seller);
     	}
-    	mLeftBtn.setOnClickListener(this);
     	
     	
     	gridview = (GridView) findViewById(R.id.main_gridview);
@@ -151,9 +150,6 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 	public void onClick(View v) {
 		super.onClick(v);
 		switch (v.getId()) {
-		case R.id.left_btn:
-			this.finish();
-			break;
 		case R.id.right_text_btn:
 			// TODO 退出
 			QuitDialog.Builder builder = new QuitDialog.Builder(mContext);  
@@ -272,7 +268,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 		case 0: // 0 二维码
 			if(isLoged()){
 				Intent intent = new Intent();
-				intent.setClass(mContext, MipcaActivityCapture.class);
+				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
 			}else{
@@ -383,6 +379,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				ToolsUtil.print("----", "123123");
 				Intent dingdanIntent = new Intent();
 				dingdanIntent.putExtra("id", dingdan.getId());
+				dingdanIntent.putExtra("i", 0);
 				intentJump(dingdanIntent, DingDanQueRenActivity.class, -2);
 				
 				break;
@@ -418,6 +415,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 		case 1:
 			/*如果是直接从相册获取*/
 			try {
+				Uri uri = data.getData();
 				startPhotoZoom(data.getData());
 			} catch (Exception e) {
 				Toast.makeText(this, "您没有选择任何照片", Toast.LENGTH_LONG).show();
@@ -429,6 +427,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			给图片设置名字和路径*/
 			File temp = new File(Environment.getExternalStorageDirectory()
 					.getPath() + "/DCIM/Camera/" + timeString + ".jpg");
+			Uri uri = Uri.fromFile(temp);
 			startPhotoZoom(Uri.fromFile(temp));
 			break;
 		case 3:
@@ -538,10 +537,13 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			RequestParams params = new RequestParams();
 			params.put("merchantid", getSharedPreferenceValue("merchantid"));
 			params.put("files", file);
+			
+			ToolsUtil.print("----", "++++++++++++++++++++++++++ 成功");
 			HttpUtils.postUserAvatar(new HttpErrorHandler() {
 				@Override
 				public void onRecevieSuccess(JSONObject json) {
 					Toast.makeText(mContext, "头像上传成功", Toast.LENGTH_SHORT).show();
+					ToolsUtil.print("----", "json = " + json);
 					String imgurl = json.getJSONObject(UrlContants.jsonData).getString("avatar");
 					SellerInfo seller = new SellerInfo();
 					seller.setImgpath(UrlContants.IMAGE_URL+imgurl);

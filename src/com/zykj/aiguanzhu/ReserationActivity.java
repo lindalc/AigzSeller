@@ -122,7 +122,7 @@ public class ReserationActivity extends BaseActivity {
 		proxy.setReleaseLabel("放开以加载...");
 		proxy.setRefreshingLabel("玩命加载中....");
 		proxy.setLastUpdatedLabel("最后的更新时间:"+DateFormat.getDateFormat(getApplicationContext()).format(new Date()));
-		proxy.setLoadingDrawable(getResources().getDrawable(R.drawable.default_ptr_rotate));
+		proxy.setLoadingDrawable(getResources().getDrawable(R.drawable.a));
 	}
 
 	private void initPTR2() {
@@ -136,7 +136,7 @@ public class ReserationActivity extends BaseActivity {
 				new Thread(){
 					public void run() {
 						try {
-							Thread.sleep(3000);
+							Thread.sleep(1000);
 							
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -154,7 +154,7 @@ public class ReserationActivity extends BaseActivity {
 				new Thread(){
 					public void run() {
 						try {
-							Thread.sleep(3000);
+							Thread.sleep(1000);
 							
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block

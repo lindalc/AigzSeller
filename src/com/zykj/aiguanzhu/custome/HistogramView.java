@@ -33,22 +33,25 @@ public class HistogramView extends View {
 
     private Paint titlePaint;// 绘制文本的画笔
     private Paint paint;// 矩形画笔 柱状图的样式信息
-    private int[] progress = { 30, 20, 35, 10, 39, 39, 39 };// 7
+//    private int[] progress = { 30, 20, 35, 10, 39, 39, 39 };// 7
                                                                             // 条，显示各个柱状的数据
+    private int[] progress = null;
     private final int TRUE = 1;// 在柱状图上显示数字
     private int[] text;// 设置点击事件，显示哪一条柱状的信息
     private Bitmap bitmap;
     // 坐标轴左侧的数标
     private String[] ySteps;
     // 坐标轴底部的星期数
-    private String[] xWeeks;
+    private String[] xWeeks = null;
     private int flag;// 是否使用动画
  
     private Bitmap bm;
     private BitmapDrawable bmDrawable;
  
-    public HistogramView(Context context) {
+    public HistogramView(Context context,int[] num,String[] date) {
         super(context);
+        progress = num;
+        this.xWeeks = date;
         init();
     }
  
@@ -60,7 +63,7 @@ public class HistogramView extends View {
     private void init() {
  
         ySteps = new String[] { "40人", "35人", "30人", "25人", "20人","10人","5人" };
-        xWeeks = new String[] { "3.18", "3.19", "3.20", "3.21", "3.22", "3.23", "3.24" };
+//        xWeeks = new String[] { "3.18", "3.19", "3.20", "3.21", "3.22", "3.23", "3.24" };
         text = new int[] { 0, 0, 0, 0, 0, 0, 0 };
  
         titlePaint = new Paint();
@@ -106,7 +109,7 @@ public class HistogramView extends View {
         // 设置底部的数字
         for (int i = 0; i < columCount - 1; i++) {
             // text, baseX, baseY, textPaint
-            canvas.drawText(xWeeks[i], dp2px(25) + step * (i + 1), height
+            canvas.drawText(xWeeks[i], dp2px(30) + step * (i + 1), height
                     + dp2px(20), titlePaint);
         }
  
