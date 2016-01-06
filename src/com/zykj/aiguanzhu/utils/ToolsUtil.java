@@ -1,6 +1,11 @@
 package com.zykj.aiguanzhu.utils;
 
+
+import com.zykj.aiguanzhu.custome.UIDialog;
+
+import android.content.Context;
 import android.util.Log;
+import android.view.View.OnClickListener;
 
 /**
  * @author lc
@@ -17,6 +22,14 @@ public class ToolsUtil {
 		if(true){
 			Log.i(tag, msg);
 		}
+	}
+	
+	/**
+	 * Exception 信息提示
+	 */
+	public static void Notic(Context context, String notic,
+			OnClickListener listener) {
+		UIDialog.ForNotic(context, notic, listener);
 	}
 	
 }

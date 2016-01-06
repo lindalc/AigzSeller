@@ -17,14 +17,15 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
-	<uses-permission android:name="android.permission.SEND_SMS" />
-	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-	<uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -133,32 +134,31 @@
             android:name="com.zykj.aiguanzhu.DingDanQueRenActivity"
             android:label="@string/title_activity_ding_dan_que_ren" >
         </activity>
-        
-        
+
         <!-- Ping++ SDK 注册 -->
-		<activity
-		    android:name="com.pingplusplus.android.PaymentActivity"
-		    android:launchMode="singleTop"
-		    android:configChanges="orientation|screenSize"
-		    android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-		<!-- 微信支付注册 -->
-		<activity-alias
-		    android:name=".wxapi.WXPayEntryActivity"
-		    android:exported="true"
-		    android:targetActivity="com.pingplusplus.android.PaymentActivity" />
-		<!-- 支付宝注册 -->
-		<activity
-		    android:name="com.alipay.sdk.app.H5PayActivity"
-		    android:configChanges="orientation|keyboardHidden|navigation"
-		    android:exported="false"
-		    android:screenOrientation="behind" />
-		<activity
-		    android:name="com.alipay.sdk.auth.AuthActivity"
-		    android:configChanges="orientation|keyboardHidden|navigation"
-		    android:exported="false"
-		    android:screenOrientation="behind" />
-		
-		 <!-- ###################注册SDK使用的Activity###################### -->
+        <activity
+            android:name="com.pingplusplus.android.PaymentActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 微信支付注册 -->
+        <activity-alias
+            android:name="com.zykj.aiguanzhu.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+        <!-- 支付宝注册 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+
+        <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
@@ -194,6 +194,10 @@
             android:value="56848a6ce0f55a7ace002512" >
         </meta-data>
 
+        <activity
+            android:name="com.zykj.aiguanzhu.B4_3_KaQuanInfoActivity"
+            android:label="@string/title_activity_b4_3__ka_quan_info" >
+        </activity>
     </application>
 
 </manifest>

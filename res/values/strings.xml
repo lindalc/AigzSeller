@@ -21,7 +21,6 @@
     <string name="listfooterview_normal">查看更多</string>
     <string name="listfooterview_ready">松开载入更多</string>
     <string name="title_activity_second">SecondActivity</string>
-    
 
     <!-- 充值 -->
     <string name="recharge_psd">积分:</string>
@@ -45,7 +44,6 @@
     <string name="notInstalled">未安装支付软件</string>
     <string name="amount">支付金额</string>
     <string name="missingImage">图片加载失败</string>
-    
 
     <!-- 积分 -->
     <string name="mypsd">我的积分</string>
@@ -61,14 +59,13 @@
 
     <!-- 订单验证码 -->
     <string name="inputcode">请输入订单验证码</string>
-    
-    <!--  订单详情 -->
-	<string name="dingdanqueren">亲，订单确认成功</string>
-	<string name="dingdanbianhao">订单编号:00000</string>
-	<string name="dingdantime">确认时间：0000</string>
-	<string name="dingdanmoney">金额：20.0</string>
-	
-	 
+
+    <!-- 订单详情 -->
+    <string name="dingdanqueren">亲，订单确认成功</string>
+    <string name="dingdanbianhao">订单编号:00000</string>
+    <string name="dingdantime">确认时间：0000</string>
+    <string name="dingdanmoney">金额：20.0</string>
+
     <!-- 我的关注 -->
     <string name="title_activity_concernuser">ConcernuserActivity</string>
     <string name="attention_title">我的关注</string>
@@ -86,8 +83,8 @@
     <string name="commit_wait">等待确定</string>
     <string name="commit_already">已经确定</string>
     <string name="title_activity_reseration_detail">ReserationDetailActivity</string>
-    
-    <!--  预约确定 -->
+
+    <!-- 预约确定 -->
     <string name="reserationcommit">预约确定</string>
 
     <!-- 预约详情 -->
@@ -125,5 +122,6 @@
     <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
     <string name="title_activity_my_yao_qing_ren">MyYaoQingRenActivity</string>
     <string name="title_activity_ding_dan_que_ren">DingDanQueRenActivity</string>
+    <string name="title_activity_b4_3__ka_quan_info">B4_3_KaQuanInfoActivity</string>
 
 </resources>

@@ -1,37 +1,32 @@
 package com.zykj.aiguanzhu;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
+import android.widget.SearchView.OnQueryTextListener;
+
 import com.android.volley.Request;
-import com.handmark.pulltorefresh.library.ILoadingLayout;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.zykj.aiguanzhu.MyIntegralActivity.RefredshDataRunnable;
 import com.zykj.aiguanzhu.adapters.CartCheckAdapter;
+import com.zykj.aiguanzhu.custome.ReserationDeleteDialog;
 import com.zykj.aiguanzhu.eneity.CartCheck;
-import com.zykj.aiguanzhu.eneity.MyIntegral;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.RequestDailog;
-import com.zykj.aiguanzhu.utils.ToolsUtil;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.text.format.DateFormat;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 
 /**
  * 
@@ -82,6 +77,52 @@ public class CartCheckActivity extends BaseActivity {
 		
 //		initPTR2();//初始化下拉刷新,上拉加载组件
 //		setPullDownLayout();//设置下拉布局的相关信息
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(mContext,B4_3_KaQuanInfoActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				final int cur = arg2;
+				String rstate = list.get(arg2).getState();
+				if(rstate.equals("3")||rstate.equals("1")){
+					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
+			        builder.setTitle("温馨提醒!");
+			        builder.setMessage("是否确定删除此条卡券");
+			        builder.setPositiveButton("", new DialogInterface.OnClickListener() {  
+			            public void onClick(DialogInterface dialog, int which) {  
+			                dialog.dismiss();  
+			                //设置你的操作事项  
+			        		
+			        		list.remove(cur);
+			        		adapter.notifyDataSetChanged();
+			            }  
+			        });  
+			  
+			        builder.setNegativeButton("",  
+			                new android.content.DialogInterface.OnClickListener() {  
+			                    public void onClick(DialogInterface dialog, int which) {  
+			                        dialog.dismiss();
+			                    }  
+			                });  
+			  
+			        builder.create().show();  
+				}else{
+					Toast.makeText(mContext, "只有已使用和已过期的卡券才能执行长按删除操作", Toast.LENGTH_LONG).show();
+				}
+				return true;
+			}
+		});
 		
 		srv1.setOnQueryTextListener(new OnQueryTextListener() {
 

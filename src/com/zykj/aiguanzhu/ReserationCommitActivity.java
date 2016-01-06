@@ -113,7 +113,7 @@ public class ReserationCommitActivity extends BaseActivity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				final int cur = arg2;
-				rstate = listReseration.get(arg2-1).getRstate();
+				rstate = listReseration.get(arg2).getRstate();
 				if(rstate == 2){
 					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
 			        builder.setTitle("Œ¬‹∞Ã·–—!");

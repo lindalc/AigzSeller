@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -46,6 +47,7 @@ import com.zykj.aiguanzhu.parser.DataParser;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.ToolsUtil;
+import com.zykj.aiguanzhu.utils.isTopURL;
 
 /**
  * @author lc
@@ -408,7 +410,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			return false;
 		}
 	}
-	
+	public String ErweimaUrl = null;
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -438,6 +440,34 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 			 */
 			if (data != null) {
 				setPicToView(data);
+			}
+			break;
+		case SCANNIN_GREQUEST_CODE:
+			if (resultCode == RESULT_OK) {
+				Bundle bundle = data.getExtras();
+				String result = bundle.getString("result");
+				if (isTopURL.isURL(result)) {
+					ErweimaUrl = bundle.getString("result");
+					ToolsUtil.Notic(mContext, ErweimaUrl,
+							new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent();
+									intent.setAction("android.intent.action.VIEW");
+									Uri content_url = Uri.parse(ErweimaUrl);
+									intent.setData(content_url);
+									startActivity(intent);
+								}
+							});
+				} else {
+					ErweimaUrl = bundle.getString("result");
+					Intent intent = new Intent();
+					intent.setClass(mContext, B4_3_KaQuanInfoActivity.class);
+					startActivity(intent);
+				}
+				// Toast.makeText(this, "result="+bundle.getString("result"),
+				// Toast.LENGTH_LONG).show();
 			}
 			break;
 		default:

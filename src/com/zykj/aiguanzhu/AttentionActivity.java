@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zykj.aiguanzhu.adapters.ConcernuserListViewAdapter;
+import com.zykj.aiguanzhu.custome.ReserationDeleteDialog;
 import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
@@ -89,6 +93,35 @@ public class AttentionActivity extends BaseActivity {
 
 		adapterAttention = new ConcernuserListViewAdapter(mContext,listAttention);
 		listView.setAdapter(adapterAttention);
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+					final int cur = arg2;
+					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
+			        builder.setTitle("温馨提醒!");
+			        builder.setMessage("是否确定删除此关注人");
+			        builder.setPositiveButton("", new DialogInterface.OnClickListener() {  
+			            public void onClick(DialogInterface dialog, int which) {  
+			                //设置你的操作事项  
+			            	dialog.dismiss();
+			            	listAttention.remove(listAttention.get(cur-1));
+			            	adapterAttention.notifyDataSetChanged();
+			            }  
+			        });  
+			  
+			        builder.setNegativeButton("",  
+			                new android.content.DialogInterface.OnClickListener() {  
+			                    public void onClick(DialogInterface dialog, int which) {  
+			                        dialog.dismiss();
+			                    }  
+			                });  
+			  
+			        builder.create().show();  
+				return true;
+			}
+		});
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
