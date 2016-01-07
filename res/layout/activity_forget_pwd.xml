@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEE"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#F3F5F5" >
+
+        <ImageView
+            android:id="@+id/im_b412_back_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/title_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="忘记密码"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </RelativeLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="17dp"
+        android:background="@drawable/shape_background1"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_phoneNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:hint="   请输入手机号"
+            android:textSize="16sp" />
+    </LinearLayout>
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/shape_background1"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_confirmCode"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/tv_getcode"
+            android:background="@null"
+            android:hint="   请输入验证码"
+            android:textSize="16sp" />
+
+        <TextView 
+            android:id="@+id/tv_getcode"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="  免费获取    "
+            android:textColor="#FFF"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:background="#ED6D00"/>
+    </RelativeLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="17dp"
+        android:background="@drawable/shape_background1"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_newPw"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:hint="   请输入新密码"
+            android:textSize="16sp" />
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/shape_background1"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_newPwAgain"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:hint="   请再次输入新密码"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="17dp"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shape_btn_background"
+            android:text="确定"
+            android:textColor="#FFF"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</LinearLayout>
