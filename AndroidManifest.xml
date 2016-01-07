@@ -43,15 +43,24 @@
                 </action>
             </intent-filter>
         </service>
-
+        
         <activity
-            android:name="com.zykj.aiguanzhu.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.zykj.aiguanzhu.WelcomeActivity"
+            android:label="@string/title_activity_welcome" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.zykj.aiguanzhu.IntroActivity"
+            android:label="@string/title_activity_intro" >
+        </activity>
+
+        <activity
+            android:name="com.zykj.aiguanzhu.MainActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.zykj.aiguanzhu.BaseActivity"
@@ -198,6 +207,7 @@
             android:name="com.zykj.aiguanzhu.B4_3_KaQuanInfoActivity"
             android:label="@string/title_activity_b4_3__ka_quan_info" >
         </activity>
+        
     </application>
 
 </manifest>

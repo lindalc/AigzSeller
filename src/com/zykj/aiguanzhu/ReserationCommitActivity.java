@@ -113,7 +113,7 @@ public class ReserationCommitActivity extends BaseActivity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				final int cur = arg2;
-				rstate = listReseration.get(arg2).getRstate();
+				rstate = listReseration.get(arg2-1).getRstate();
 				if(rstate == 2){
 					ReserationDeleteDialog.Builder builder = new ReserationDeleteDialog.Builder(mContext);  
 			        builder.setTitle("温馨提醒!");
@@ -141,7 +141,7 @@ public class ReserationCommitActivity extends BaseActivity {
 			  
 			        builder.create().show();  
 				}else{
-					Toast.makeText(mContext, "只有取消的预约才能执行长按删除操作", Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "只有取消的预约才能执行长按删除操作", Toast.LENGTH_SHORT).show();
 				}
 				return true;
 			}

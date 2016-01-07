@@ -110,6 +110,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
     	img = (CustomImageView) findViewById(R.id.main_img_headportrait);
     	img.setOnClickListener(this);
     	txt_name = (TextView) findViewById(R.id.main_text_name);
+    	txt_name.setOnClickListener(this);
     	txt_total = (TextView) findViewById(R.id.main_txt_total_income);
     	txt_spend = (TextView) findViewById(R.id.main_txt_coupon);
     	txt_count = (TextView) findViewById(R.id.main_txt_couponcount);
@@ -121,9 +122,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
     	
     	if (isLoged()) {
     		setTitleContent(0, R.string.quit,R.string.seller,1);
+    		mRightTextBtn.setVisibility(View.VISIBLE);
     		mRightTextBtn.setOnClickListener(this);
     	}else{
-    		setTitleContent(R.drawable.title_back, 0,R.string.seller);
+    		setTitleContent(0, 0,R.string.seller);
     	}
     	
     	
@@ -167,6 +169,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 	        		txt_count.setText("销量券:"+0.0);
 	    			txt_name.setText(R.string.unlogin_user_name);
 	    			img.setImageResource(R.drawable.main_icon_headportrait);
+	    			
+	    			mRightTextBtn.setVisibility(View.GONE);
 	            }  
 	        });  
 	  
@@ -187,6 +191,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				startActivityForResult(loginIntent, DataConstants.MAINACTIVITY_LOGIN);
 			}else{
 				UIDialog.ForThreeBtn(this, new String[]{"相册", "拍照", "取消"}, this);
+			}
+			break;
+		case R.id.main_text_name:
+			if(!isLoged()){
+				Intent loginIntent = new Intent();
+				loginIntent.setClass(mContext, LoginActivity.class);
+				startActivityForResult(loginIntent, DataConstants.MAINACTIVITY_LOGIN);
+			}else{
+				Toast.makeText(mContext, "查看个人资料", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.dialog_modif_1:
@@ -243,7 +256,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent rechargeIntent = new Intent();
 				intentJump(rechargeIntent,RechargeActivity.class,DataConstants.MAINACTIVITY_RECHARGE);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.activity_main_psd:
@@ -252,7 +265,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent psdIntent = new Intent();
 				intentJump(psdIntent,MyIntegralActivity.class,DataConstants.MAINACTIVITY_PSD);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		default:
@@ -274,7 +287,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 1:  // 1 订单验证码项
@@ -302,7 +315,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 		  
 		        builder.create().show();  
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 	        break;
 		case 2: // 2 我的关注
@@ -310,7 +323,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent attentionIntent = new Intent();
 				intentJump(attentionIntent,AttentionActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 3: // 3 预约用户
@@ -318,7 +331,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent reserationCommitIntent = new Intent();
 				intentJump(reserationCommitIntent,ReserationActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 4: // 4 预约确定
@@ -326,7 +339,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent reserationUsersIntent = new Intent();
 				intentJump(reserationUsersIntent,ReserationCommitActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 5: // 5 我的邀请
@@ -334,7 +347,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent inviteIntent = new Intent();
 				intentJump(inviteIntent,InviteActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 6: // 6 卡券充值
@@ -342,7 +355,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent rechargeIntent = new Intent();
 				intentJump(rechargeIntent,RechargeActivity.class,DataConstants.MAINACTIVITY_RECHARGE);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 7: // 7 卡券数据
@@ -350,7 +363,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent cartDataIntent = new Intent();
 				intentJump(cartDataIntent,CartDataActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 8: // 8 卡券核销
@@ -358,7 +371,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Intent cartCheckIntent = new Intent();
 				intentJump(cartCheckIntent, CartCheckActivity.class,position);
 			}else{
-				Toast.makeText(mContext, "请先登录", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		default:
@@ -387,10 +400,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				break;
 			case DataConstants.MAINACTIVITY_CODE_FAULT:
 				String errdesc = (String) msg.obj;
-				Toast.makeText(mContext, errdesc, Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, errdesc, Toast.LENGTH_SHORT).show();
 				break;
 			default:
-				Toast.makeText(mContext, "验证码错误，请重新输入", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
 				break;
 			}
 		};
@@ -420,7 +433,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				Uri uri = data.getData();
 				startPhotoZoom(data.getData());
 			} catch (Exception e) {
-				Toast.makeText(this, "您没有选择任何照片", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "您没有选择任何照片", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 2:
@@ -467,7 +480,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 					startActivity(intent);
 				}
 				// Toast.makeText(this, "result="+bundle.getString("result"),
-				// Toast.LENGTH_LONG).show();
+				// Toast.LENGTH_SHORT).show();
 			}
 			break;
 		default:

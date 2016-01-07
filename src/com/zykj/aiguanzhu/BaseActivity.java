@@ -169,6 +169,30 @@ public class BaseActivity extends Activity implements OnClickListener {
 		}
 	}
     
+    protected void setTitleContent(int left_src_id, int right_src_id, int title_id,String i){
+		mLeftBtn = (LinearLayout)findViewById(R.id.left_btn);
+		mLeftIcon = (ImageView)findViewById(R.id.left_icon);
+		mRightBtn = (ImageView)findViewById(R.id.right_btn);
+		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
+		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
+		titileTextView = (TextView)findViewById(R.id.title);
+
+		if (left_src_id != 0) {
+			mLeftIcon.setImageResource(left_src_id);
+		}
+
+		if (right_src_id != 0) {
+			mRightTextBtn.setVisibility(View.VISIBLE);
+			mRightTextBtn.setText(right_src_id);
+			mRightTextBtn.setTextColor(Color.WHITE);
+		}
+
+		if (title_id != 0) {
+			titileTextView.setText(title_id);
+			titileTextView.setTextColor(Color.WHITE);
+		}
+	}
+    
     protected void setTitleContent(int left_src_id, int right_src_id, int title_id,boolean right){
 		mLeftBtn = (LinearLayout)findViewById(R.id.left_btn);
 		mLeftIcon = (ImageView)findViewById(R.id.left_icon);

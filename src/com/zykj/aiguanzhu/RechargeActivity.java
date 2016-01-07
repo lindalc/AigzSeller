@@ -28,6 +28,8 @@ import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -58,8 +60,8 @@ public class RechargeActivity extends BaseActivity {
 	
 	private String charge;
 	private static RequestQueue mRequestQueue; 
-	
-	
+	private TextWatcher tw1, tw2;
+	private int v1 = 1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +84,53 @@ public class RechargeActivity extends BaseActivity {
 		btn_alipay = (RadioButton) findViewById(R.id.recharge_alipay);
 		btn_wechat = (RadioButton) findViewById(R.id.recharge_wechat);
 		
+		tw1 = new TextWatcher() {
+		    @Override
+		    public void onTextChanged(CharSequence s, int start, int before,int count) {
+		    	et_count.removeTextChangedListener(tw2);
+		        int et1val = 0;
+		        try {
+		            et1val =Integer.parseInt(s.toString());
+		        } catch (Exception ex) {
+		            et1val = 0;
+		        }
+		        int et2val = et1val * v1;
+		        et_count.setText("" + et2val);
+		    }
+		    @Override
+		    public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+		        }
+		    @Override
+		    public void afterTextChanged(Editable s) {
+		    	et_count.addTextChangedListener(tw2);
+		    }
+	    };
+	    
+	    tw2 = new TextWatcher() {
+	        @Override
+	        public void onTextChanged(CharSequence s, int start, int before,int count) {
+	        	et_psd.removeTextChangedListener(tw1);
+	            int et2val = 0;
+	            try {
+	                et2val = Integer.parseInt(s.toString());
+	            } catch (Exception ex) {
+	                et2val = 0;
+	            }
+	            int et1val = et2val * v1;
+	            et_psd.setText("" + et1val);
+	        }
+	        @Override
+	        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+	        }
+	        @Override
+	        public void afterTextChanged(Editable s) {
+	        	et_psd.addTextChangedListener(tw1);
+	        }
+        };
+     
+        et_psd.addTextChangedListener(tw1);
+        et_count.addTextChangedListener(tw2);
+		
 	}
 	
 	 /*
@@ -99,7 +148,7 @@ public class RechargeActivity extends BaseActivity {
 		case R.id.recharge_btn:
 			if(btn_alipay.isChecked()){
 				
-				Toast.makeText(mContext, "alipay", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "alipay", Toast.LENGTH_SHORT).show();
 			}else if(btn_wechat.isChecked()){
 				
 				str_psd = et_psd.getText().toString();
@@ -118,6 +167,7 @@ public class RechargeActivity extends BaseActivity {
 						public void onResponse(JSONObject response) {
 							
 							charge = response.toString();
+							ToolsUtil.print("----", "charge = " + charge);
 							if(null==charge){
 				        		showMsg("请求出错", "请检查URL", "URL无法获取charge");
 				        		return;
@@ -137,13 +187,13 @@ public class RechargeActivity extends BaseActivity {
 						public void onErrorResponse(VolleyError error) {
 							RequestDailog.closeDialog();
 				            ToolsUtil.print("----","ErrorResponse="+error.getMessage());
-				            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_LONG).show();
+				            Toast.makeText(mContext, "网络连接失败，请重试", Toast.LENGTH_SHORT).show();
 						}
 					});
 					mRequestQueue.add(jr);  
 					
 				}else{
-					Toast.makeText(mContext, "请输入充值积分或金额", Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "请输入充值积分或金额", Toast.LENGTH_SHORT).show();
 				}
 			}
 			break;

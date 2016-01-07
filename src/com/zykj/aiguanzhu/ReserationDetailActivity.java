@@ -113,7 +113,7 @@ public class ReserationDetailActivity extends BaseActivity {
 			case DataConstants.RESERATION_DETAIL:
 				RequestDailog.closeDialog();
 				String errdesc = (String) msg.obj;
-				Toast.makeText(mContext, errdesc, Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, errdesc, Toast.LENGTH_SHORT).show();
 				layout.setVisibility(View.GONE);
 				break;
 			default:

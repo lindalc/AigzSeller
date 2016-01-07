@@ -4,6 +4,7 @@ package com.zykj.aiguanzhu.utils;
 import com.zykj.aiguanzhu.custome.UIDialog;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 import android.view.View.OnClickListener;
 
@@ -30,6 +31,24 @@ public class ToolsUtil {
 	public static void Notic(Context context, String notic,
 			OnClickListener listener) {
 		UIDialog.ForNotic(context, notic, listener);
+	}
+	
+	/**
+	 * 获取当前应用的版本号
+	 */
+
+	public static int getAppVersion(Context context) {
+		int version = 0;
+		try {
+			PackageInfo packinfo = context.getPackageManager().getPackageInfo(
+					context.getPackageName(), 0);
+			version = packinfo.versionCode;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return version;
+		}
+
+		return version;
 	}
 	
 }

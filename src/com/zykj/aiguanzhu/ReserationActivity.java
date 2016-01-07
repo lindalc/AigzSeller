@@ -33,9 +33,11 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
@@ -102,6 +104,16 @@ public class ReserationActivity extends BaseActivity {
 				intent.putExtra("rstate", rstate);
 				intent.putExtra("reserationid", reserationid);
 				startActivity(intent);
+			}
+		});
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				Toast.makeText(mContext, "只有取消的预约才能执行长按删除操作", Toast.LENGTH_SHORT).show();
+				return true;
 			}
 		});
 		

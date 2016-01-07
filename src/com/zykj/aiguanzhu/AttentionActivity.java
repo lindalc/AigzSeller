@@ -93,6 +93,19 @@ public class AttentionActivity extends BaseActivity {
 
 		adapterAttention = new ConcernuserListViewAdapter(mContext,listAttention);
 		listView.setAdapter(adapterAttention);
+		
+		
+		initPTR2();//初始化下拉刷新,上拉加载组件
+		setPullDownLayout();//设置下拉布局的相关信息
+		
+		RequestDailog.showDialog(this, "请稍后");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("merchantid", merchantid);
+		map.put("pagenumber", i+"");
+		map.put("pagesize", "10");
+		json = JsonUtils.toJson(map);
+		DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);
+		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -129,22 +142,13 @@ public class AttentionActivity extends BaseActivity {
 					long arg3) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(mContext,ConUserDetailActivity.class);
-				intent.putExtra("id", list.get(arg2-1).getUserid());
-				intent.putExtra("name", list.get(arg2-1).getName());
+				ToolsUtil.print("----", "itemposition"+arg2);
+				ToolsUtil.print("----", "list.get(arg2-1).getUserid()"+list.get(arg2-1).getUserid());
+				intent.putExtra("id", listAttention.get(arg2-1).getUserid());
+				intent.putExtra("name", listAttention.get(arg2-1).getName());
 				mContext.startActivity(intent);
 			}
 		});
-		
-		initPTR2();//初始化下拉刷新,上拉加载组件
-		setPullDownLayout();//设置下拉布局的相关信息
-		
-		RequestDailog.showDialog(this, "请稍后");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("merchantid", merchantid);
-		map.put("pagenumber", i+"");
-		map.put("pagesize", "10");
-		json = JsonUtils.toJson(map);
-		DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);
 		
 	}
 	
@@ -213,16 +217,9 @@ public class AttentionActivity extends BaseActivity {
 			switch(msg.what){
 			case DataConstants.MAINACTIVITY_ATTENTION:
 				RequestDailog.closeDialog();
-				if(list != null){
-					list.clear();
-				}
 				list = (ArrayList<AttentionUser>) msg.obj;
 				
-				if(list != null){
-					listAttention.addAll(list);
-				}else{
-					Toast.makeText(mContext, "没有更多数据了", Toast.LENGTH_LONG).show();
-				}
+				listAttention.addAll(list);
 				adapterAttention.notifyDataSetChanged();
 				break;
 			}
@@ -258,6 +255,7 @@ public class AttentionActivity extends BaseActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		
 		listView = null;
 	}
 	
@@ -283,15 +281,19 @@ public class AttentionActivity extends BaseActivity {
 				json = JsonUtils.toJson(map);
 				DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);
 			}else{
+				listAttention.clear();
+				int j = 10;
+				j+=10;
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("merchantid", merchantid);
-				map.put("pagenumber", (++i)+"");
-				map.put("pagesize", "10");
+				map.put("pagenumber", i+"");
+				map.put("pagesize", j+"");
 				json = JsonUtils.toJson(map);
 				DataParser.getAttention(mContext, Request.Method.GET, HttpUtils.url_attention(json), null, handler);
 			}
 			
-			ToolsUtil.print("----", ""+listAttention.size());
+			ToolsUtil.print("----", "listAttention"+listAttention.size());
+			ToolsUtil.print("----", "list"+list.size());
 			
 			//通知下拉刷新控件，数据已加载完成
 			listView.onRefreshComplete();

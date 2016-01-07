@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.zykj.aiguanzhu.adapters.InviteAdapter;
 import com.zykj.aiguanzhu.adapters.ReserationAdapter;
 import com.zykj.aiguanzhu.eneity.AttentionUser;
 import com.zykj.aiguanzhu.eneity.ReserationUser;
@@ -46,8 +47,8 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 	private LinearLayout myinviteLayout;
 	
 	private ListView listview;
-	private ReserationAdapter adapterReseration;
-	private ArrayList<ReserationUser> listReseration;
+	private InviteAdapter adapterInvite;
+	private ArrayList<ReserationUser> listInvite;
 	
 	private String ShareContent ;
 	private String ShareTitle;
@@ -75,10 +76,15 @@ public class InviteActivity extends BaseActivity implements OnItemClickListener{
 		myinviteLayout = (LinearLayout) findViewById(R.id.activity_myinvite);
 		
 		listview = (ListView) findViewById(R.id.acitivity_invite_listview);
-		listReseration = new ArrayList<ReserationUser>();
-
-		adapterReseration = new ReserationAdapter(mContext,listReseration);
-		listview.setAdapter(adapterReseration);
+		listInvite = new ArrayList<ReserationUser>();
+		
+		ReserationUser a = new ReserationUser("123", "–’√˚", null, "456", "2016-01-03", 1, 0);
+		ReserationUser b = new ReserationUser("123", "–’√˚", null, "456", "2016-01-03", 1, 0);
+		listInvite.add(a);
+		listInvite.add(b);
+		
+		adapterInvite = new InviteAdapter(mContext,listInvite);
+		listview.setAdapter(adapterInvite);
 		
 //		RequestDailog.showDialog(this, "«Î…‘∫Û");
 		Map<String, String> map = new HashMap<String, String>();

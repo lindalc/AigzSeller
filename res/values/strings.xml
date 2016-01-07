@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AigzSeller</string>
+    <string name="app_name">爱关注(商户版)</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_base">BaseActivity</string>
@@ -112,6 +112,7 @@
 
     <!-- 卡券数据 -->
     <string name="cartdata">卡券数据分析</string>
+    <string name="cartdatafresh">刷新</string>
     <string name="title_activity_cart_check">CartCheckActivity</string>
 
     <!-- 卡券核销 -->
@@ -123,5 +124,7 @@
     <string name="title_activity_my_yao_qing_ren">MyYaoQingRenActivity</string>
     <string name="title_activity_ding_dan_que_ren">DingDanQueRenActivity</string>
     <string name="title_activity_b4_3__ka_quan_info">B4_3_KaQuanInfoActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_intro">IntroActivity</string>
 
 </resources>

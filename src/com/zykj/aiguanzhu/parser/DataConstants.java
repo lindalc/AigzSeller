@@ -27,6 +27,14 @@ public class DataConstants {
 	 */
 	public static final String config = "config";
 	/**
+	 * 当前的是否已经进行过指引
+	 */
+	public static final String IS_INTRO = "is_intro";
+	/**
+	 * 当前应用中存储的版本号
+	 */
+	public static final String VERSION = "version";
+	/**
 	 * mob短信验证APP Key
 	 * 
 	 */

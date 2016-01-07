@@ -118,7 +118,7 @@ public class CartCheckActivity extends BaseActivity {
 			  
 			        builder.create().show();  
 				}else{
-					Toast.makeText(mContext, "只有已使用和已过期的卡券才能执行长按删除操作", Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "只有已使用和已过期的卡券才能执行长按删除操作", Toast.LENGTH_SHORT).show();
 				}
 				return true;
 			}
@@ -268,7 +268,6 @@ public class CartCheckActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onStop();
 		DataParser.cancel(mContext);
-		list = null;
 		System.gc();
 	}
 	
@@ -276,6 +275,7 @@ public class CartCheckActivity extends BaseActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		list = null;
 		listview = null;
 	}
 	

@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.zykj.aiguanzhu.custome.HistogramView;
@@ -49,10 +50,14 @@ public class CartDataActivity extends BaseActivity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cart_data);
+		rLayout = (RelativeLayout) findViewById(R.id.title_layout);
+		rLayout.setBackgroundResource(R.drawable.title_orange);
 		
 		merchantid = getSharedPreferenceValue("merchantid");
 		
-		setTitleContent(R.drawable.title_orange_back, R.string.cartdata);
+		setTitleContent(R.drawable.title_orange_back, R.string.cartdatafresh,R.string.cartdata,"");
+		mRightTextBtn.setOnClickListener(this);
+		
 		mLeftBtn.setOnClickListener(this);
 //		for (String tem : LABLE_TEXT) {
 //			optionsX.add(tem);
@@ -117,6 +122,13 @@ public class CartDataActivity extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.left_btn:
 			this.finish();
+			break;
+		case R.id.right_text_btn:
+			RequestDailog.showDialog(this, "«Î…‘∫Û");
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("merchantid", merchantid);
+			String json = JsonUtils.toJson(map);
+			DataParser.getCartData(mContext, Request.Method.GET, HttpUtils.url_cartdata(json), null, handler);
 			break;
 		default:
 			break;

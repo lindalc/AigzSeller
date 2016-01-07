@@ -116,30 +116,32 @@ public class HistogramView extends View {
         // 绘制矩形
         if (progress != null && progress.length > 0) {
             for (int i = 0; i < progress.length; i++) {// 循环遍历将7条柱状图形画出来
-                int value = progress[i];
-                paint.setAntiAlias(true);// 抗锯齿效果
-                paint.setStyle(Paint.Style.FILL);
-                paint.setTextSize(sp2px(15));// 字体大小
-                paint.setColor(Color.GRAY);// 字体颜色
-                Rect rect = new Rect();// 柱状图的形状
- 
-                rect.left = step * (i + 1);
-                rect.right = dp2px(30) + step * (i + 1);
-                int rh = (int)(leftHeight - leftHeight * (value / 45.0));
-                rect.top = rh;
-                rect.bottom = height;
-                
- 
-                bm = BitmapFactory.decodeResource(getResources(), R.drawable.gray);
-                bmDrawable = new BitmapDrawable(getResources(), bm);
-                canvas.drawBitmap(bmDrawable.getBitmap(), null, rect, paint);
-//                canvas.drawBitmap(bitmap, null, rect, paint);
-                
-                // 是否显示柱状图上方的数字
-//                if (this.text[i] == TRUE) {
-//                    canvas.drawText(value + "", dp2px(15) + step * (i + 1)
-//                            - dp2px(15), rh + dp2px(5), paint);
-//                }
+            	if(progress[i]!=0){
+            		int value = progress[i];
+	                paint.setAntiAlias(true);// 抗锯齿效果
+	                paint.setStyle(Paint.Style.FILL);
+	                paint.setTextSize(sp2px(15));// 字体大小
+	                paint.setColor(Color.GRAY);// 字体颜色
+	                Rect rect = new Rect();// 柱状图的形状
+	 
+	                rect.left = step * (i + 1);
+	                rect.right = dp2px(30) + step * (i + 1);
+	                int rh = (int)(leftHeight - leftHeight * (value / 45.0));
+	                rect.top = rh;
+	                rect.bottom = height;
+	                
+	 
+	                bm = BitmapFactory.decodeResource(getResources(), R.drawable.gray);
+	                bmDrawable = new BitmapDrawable(getResources(), bm);
+	                canvas.drawBitmap(bmDrawable.getBitmap(), null, rect, paint);
+	//                canvas.drawBitmap(bitmap, null, rect, paint);
+	                
+	                // 是否显示柱状图上方的数字
+	//                if (this.text[i] == TRUE) {
+	//                    canvas.drawText(value + "", dp2px(15) + step * (i + 1)
+	//                            - dp2px(15), rh + dp2px(5), paint);
+	//                }
+            	}
  
             }
         }
