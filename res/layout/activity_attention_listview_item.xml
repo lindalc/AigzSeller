@@ -44,11 +44,12 @@
 
  			<TextView
  			    android:id="@+id/concernuser_listview_item_intruce"
-                android:layout_width="fill_parent"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/concernuser_listview_item_user_name"
 				android:layout_marginTop="5dp"
                 android:text="love myself"
+                android:singleLine="true"
                 android:textColor="#ff666666"
                 android:textSize="@dimen/sixteen" />
  			

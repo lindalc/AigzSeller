@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.zykj.aiguanzhu.custome.RippleView;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.utils.JsonUtils;
 import com.zykj.aiguanzhu.utils.RequestDailog;
@@ -46,14 +47,14 @@ public class RegisterActivity extends BaseActivity {
 	private Context mContext = RegisterActivity.this;
 
 	private ImageView im_b411_back_btn;//返回
-	private TextView tv_getCode;//获取验证码
+	private RippleView tv_getCode;//获取验证码
 	
 	private EditText et_phone;//手机号
 	private EditText et_verifycode;//验证码
 	private EditText et_invitecode;//邀请码
 	private EditText et_scode;//密码
 	
-	private Button btn_certification;//确认
+	private RippleView btn_certification;//确认
 	
 	public String mobile = null;
 	public String password = null;
@@ -163,12 +164,12 @@ public class RegisterActivity extends BaseActivity {
 
 	public void initView() {
 		im_b411_back_btn = (ImageView) findViewById(R.id.im_b411_back_btn);
-		tv_getCode = (TextView) findViewById(R.id.tv_getCode);
+		tv_getCode = (RippleView) findViewById(R.id.tv_getCode);
 		et_phone = (EditText) findViewById(R.id.et_phone);
 		et_verifycode = (EditText) findViewById(R.id.et_verifycode);
 		et_invitecode = (EditText) findViewById(R.id.et_invitecode);
 		et_scode = (EditText) findViewById(R.id.et_scode);
-		btn_certification = (Button) findViewById(R.id.btn_certification);
+		btn_certification = (RippleView) findViewById(R.id.btn_certification);
 		setListener(im_b411_back_btn,tv_getCode,btn_certification);
 	}
 

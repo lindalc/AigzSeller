@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CartCheckActivity"
-    android:background="@color/white"
+    android:background="#EEEEEE"
      >
 
     <!-- 标题栏 -->

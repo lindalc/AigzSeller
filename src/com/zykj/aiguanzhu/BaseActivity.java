@@ -26,6 +26,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.android.volley.toolbox.Volley;
+import com.zykj.aiguanzhu.custome.Titanic;
+import com.zykj.aiguanzhu.custome.TitanicTextView;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.utils.CustomProgressDialog;
 import com.zykj.aiguanzhu.utils.LoadingProgressDialog;
@@ -105,12 +107,15 @@ public class BaseActivity extends Activity implements OnClickListener {
     /**+++ for title bar +++*/
 	protected ImageView mLeftIcon, mRightBtn,mSearchBtn,mAddBtn,mMoreBtn;
 	//protected LinearLayout mRightBtn;
-	protected TextView titileTextView,mFristTitlte,mTrowTitle,mRightTextBtn;
+	protected TextView mFristTitlte,mTrowTitle,mRightTextBtn;
+	private TitanicTextView titileTextView;
     protected LinearLayout mLeftBtn,mCenterLayout;
     /**
 	 * 标题栏
 	 */
     protected RelativeLayout rLayout;
+    private Titanic titanic;
+    
     
     /**
      * 白色标题
@@ -124,7 +129,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mRightBtn = (ImageView)findViewById(R.id.right_btn);
 		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
 		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
-		titileTextView = (TextView)findViewById(R.id.title);
+		titileTextView = (TitanicTextView)findViewById(R.id.title);
 
 		if (left_src_id != 0) {
 			mLeftIcon.setImageResource(left_src_id);
@@ -137,6 +142,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 		if (title_id != 0) {
 			titileTextView.setText(title_id);
+			titanic = new Titanic();
+			titanic.start(titileTextView);
 		}
 	}
     
@@ -152,7 +159,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mRightBtn = (ImageView)findViewById(R.id.right_btn);
 		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
 		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
-		titileTextView = (TextView)findViewById(R.id.title);
+		titileTextView = (TitanicTextView)findViewById(R.id.title);
 
 		if (left_src_id != 0) {
 			mLeftIcon.setImageResource(left_src_id);
@@ -166,6 +173,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 		if (title_id != 0) {
 			titileTextView.setText(title_id);
+			titanic = new Titanic();
+			titanic.start(titileTextView);
 		}
 	}
     
@@ -175,7 +184,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mRightBtn = (ImageView)findViewById(R.id.right_btn);
 		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
 		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
-		titileTextView = (TextView)findViewById(R.id.title);
+		titileTextView = (TitanicTextView)findViewById(R.id.title);
 
 		if (left_src_id != 0) {
 			mLeftIcon.setImageResource(left_src_id);
@@ -190,6 +199,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 		if (title_id != 0) {
 			titileTextView.setText(title_id);
 			titileTextView.setTextColor(Color.WHITE);
+			titanic = new Titanic();
+			titanic.start(titileTextView);
 		}
 	}
     
@@ -199,7 +210,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mRightBtn = (ImageView)findViewById(R.id.right_btn);
 		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
 		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
-		titileTextView = (TextView)findViewById(R.id.title);
+		titileTextView = (TitanicTextView)findViewById(R.id.title);
 
 		if (left_src_id != 0) {
 			mLeftIcon.setImageResource(left_src_id);
@@ -213,6 +224,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 		if (title_id != 0) {
 			titileTextView.setText(title_id);
 			titileTextView.setTextColor(Color.WHITE);
+			titanic = new Titanic();
+			titanic.start(titileTextView);
 		}
 	}
     
@@ -227,7 +240,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mRightBtn = (ImageView)findViewById(R.id.right_btn);
 		mRightTextBtn = (TextView)findViewById(R.id.right_text_btn);
 		//mRightBtn = (LinearLayout)findViewById(R.id.right_btn);
-		titileTextView = (TextView)findViewById(R.id.title);
+		titileTextView = (TitanicTextView)findViewById(R.id.title);
 		rLayout = (RelativeLayout) findViewById(R.id.title_layout);
 		rLayout.setBackgroundResource(R.drawable.title_orange);
 
@@ -238,6 +251,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 		if (title_id != 0) {
 			titileTextView.setText(title_id);
 			titileTextView.setTextColor(Color.WHITE);
+			titanic = new Titanic();
+			titanic.start(titileTextView);
 		}
 	}
     
@@ -289,6 +304,12 @@ public class BaseActivity extends Activity implements OnClickListener {
 			manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
 		}
 		                  
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
 	}
 
 }

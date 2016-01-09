@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.zykj.aiguanzhu.custome.RippleView;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
@@ -38,8 +39,8 @@ public class ForgetPwdActivity extends BaseActivity {
 	private Context mContext = ForgetPwdActivity.this;
 	
 	private ImageView im_b412_back_btn;// 忘记密码
-	private TextView tv_getcode;//获取验证码
-	private Button btn_confirm;//获取验证码
+	private RippleView tv_getcode;//获取验证码
+	private RippleView btn_confirm;//获取验证码
 	private EditText et_phoneNumber;//手机号
 	private EditText et_confirmCode;//验证码
 	private EditText et_newPw;//密码
@@ -152,8 +153,8 @@ public class ForgetPwdActivity extends BaseActivity {
 	};
 	public void initView() {
 		im_b412_back_btn = (ImageView) findViewById(R.id.im_b412_back_btn);
-		tv_getcode = (TextView) findViewById(R.id.tv_getcode);
-		btn_confirm = (Button) findViewById(R.id.btn_confirm);
+		tv_getcode = (RippleView) findViewById(R.id.tv_getcode);
+		btn_confirm = (RippleView) findViewById(R.id.btn_confirm);
 		
 		et_phoneNumber = (EditText) findViewById(R.id.et_phoneNumber);
 		et_confirmCode = (EditText) findViewById(R.id.et_confirmCode);

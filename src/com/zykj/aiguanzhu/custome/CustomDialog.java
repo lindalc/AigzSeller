@@ -150,7 +150,7 @@ public class CustomDialog extends Dialog {
             if (positiveButtonText != null) {  
                       
                 if (positiveButtonClickListener != null) {  
-                    ((View) layout.findViewById(R.id.positiveButton))  
+                    ((RippleView) layout.findViewById(R.id.positiveButton))  
                             .setOnClickListener(new View.OnClickListener() {  
                                 public void onClick(View v) {  
                                     positiveButtonClickListener.onClick(dialog,  
@@ -166,7 +166,7 @@ public class CustomDialog extends Dialog {
             // set the cancel button  
             if (negativeButtonText != null) {  
                 if (negativeButtonClickListener != null) {  
-                    ((View) layout.findViewById(R.id.negativeButton))  
+                    ((RippleView) layout.findViewById(R.id.negativeButton))  
                             .setOnClickListener(new View.OnClickListener() {  
                                 public void onClick(View v) {  
                                     negativeButtonClickListener.onClick(dialog,  

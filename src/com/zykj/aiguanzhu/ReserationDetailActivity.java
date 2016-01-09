@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.zykj.aiguanzhu.custome.RippleView;
 import com.zykj.aiguanzhu.eneity.ReserationDetail;
 import com.zykj.aiguanzhu.parser.DataConstants;
 import com.zykj.aiguanzhu.parser.DataParser;
@@ -32,7 +33,7 @@ public class ReserationDetailActivity extends BaseActivity {
 	private int reserationid;
 	
 	private TextView txt_username,txt_otherinfo,txt_action,txt_datetime,txt_personnumber,txt_mobile,txt_miaoshu;
-	private ImageView img_agree,img_refuse;
+	private RippleView  img_agree,img_refuse;
 	
 	private LinearLayout layout;
 	private int rstate;
@@ -69,8 +70,8 @@ public class ReserationDetailActivity extends BaseActivity {
 		case 0:
 			layout.setVisibility(View.VISIBLE);
 			
-			img_agree = (ImageView) findViewById(R.id.activity_reserationdetail_agree);
-			img_refuse = (ImageView) findViewById(R.id.activity_reserationdetail_refuse);
+			img_agree = (RippleView) findViewById(R.id.activity_reserationdetail_agree);
+			img_refuse = (RippleView) findViewById(R.id.activity_reserationdetail_refuse);
 			
 			img_agree.setOnClickListener(this);
 			img_refuse.setOnClickListener(this);
@@ -140,6 +141,8 @@ public class ReserationDetailActivity extends BaseActivity {
 			mapagree.put("rstate", "1");
 			String jsonagree = JsonUtils.toJson(mapagree);
 			DataParser.getReserationUpdate(mContext, Request.Method.GET, HttpUtils.url_reserationUpdatel(jsonagree), null, handler);
+			//TODO Ë¢ÐÂActivity
+//			onCreate(null);
 			break;
 		case R.id.activity_reserationdetail_refuse:
 			Map<String, String> map = new HashMap<String, String>();
@@ -147,6 +150,7 @@ public class ReserationDetailActivity extends BaseActivity {
 			map.put("rstate", "2");
 			String json = JsonUtils.toJson(map);
 			DataParser.getReserationUpdate(mContext, Request.Method.GET, HttpUtils.url_reserationUpdatel(json), null, handler);
+//			onCreate(null);
 			break;
 		default:
 			break;

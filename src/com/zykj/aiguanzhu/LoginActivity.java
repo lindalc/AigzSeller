@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.zykj.aiguanzhu.custome.RippleView;
 import com.zykj.aiguanzhu.eneity.SellerInfo;
 import com.zykj.aiguanzhu.utils.HttpUtils;
 import com.zykj.aiguanzhu.utils.JsonUtils;
@@ -41,7 +42,7 @@ public class LoginActivity extends BaseActivity {
 	private TextView tv_b41_zhuce;//注册
 	private TextView tv_forgetPassWord;//忘记密码
 	private ImageView im_b541_back_btn;//返回
-	private Button btn_login;
+	private RippleView btn_login;
 	private EditText et_login_name;//用户名／手机号
 	private EditText et_passWord;//密码
 	private RequestQueue mRequestQueue; 
@@ -59,7 +60,7 @@ public class LoginActivity extends BaseActivity {
 		tv_b41_zhuce = (TextView) findViewById(R.id.tv_b41_zhuce);
 		tv_forgetPassWord = (TextView) findViewById(R.id.tv_forgetPassWord);
 		im_b541_back_btn = (ImageView) findViewById(R.id.im_b541_back_btn);
-		btn_login = (Button) findViewById(R.id.btn_login);
+		btn_login = (RippleView) findViewById(R.id.btn_login);
 		et_login_name = (EditText) findViewById(R.id.et_login_name);
 		et_passWord = (EditText) findViewById(R.id.et_passWord);
 		setListener(tv_b41_zhuce,tv_forgetPassWord,im_b541_back_btn,btn_login);

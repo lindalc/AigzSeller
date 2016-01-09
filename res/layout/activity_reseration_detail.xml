@@ -208,22 +208,22 @@
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         >
-        <ImageView 
+        <com.zykj.aiguanzhu.custome.RippleView 
             android:id="@+id/activity_reserationdetail_agree"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/reseration_comit"/>
+            android:background="@drawable/reseration_comit"/>
         <TextView 
             android:layout_width="5dp"
             android:layout_height="match_parent"
             android:background="#EEEEEE"/>
-        <ImageView 
+        <com.zykj.aiguanzhu.custome.RippleView  
             android:id="@+id/activity_reserationdetail_refuse"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/reseration_cancel"/>
+            android:background="@drawable/reseration_cancel"/>
     </LinearLayout>
 
 </RelativeLayout>

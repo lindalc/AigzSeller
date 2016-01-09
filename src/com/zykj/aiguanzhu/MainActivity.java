@@ -461,18 +461,13 @@ public class MainActivity extends BaseActivity implements OnItemClickListener{
 				String result = bundle.getString("result");
 				if (isTopURL.isURL(result)) {
 					ErweimaUrl = bundle.getString("result");
-					ToolsUtil.Notic(mContext, ErweimaUrl,
-							new OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									// TODO Auto-generated method stub
-									Intent intent = new Intent();
-									intent.setAction("android.intent.action.VIEW");
-									Uri content_url = Uri.parse(ErweimaUrl);
-									intent.setData(content_url);
-									startActivity(intent);
-								}
-							});
+					
+					Intent intent = new Intent();
+					intent.setAction("android.intent.action.VIEW");
+					Uri content_url = Uri.parse(ErweimaUrl);
+					intent.setData(content_url);
+					startActivity(intent);
+						
 				} else {
 					ErweimaUrl = bundle.getString("result");
 					Intent intent = new Intent();
